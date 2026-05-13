@@ -36,12 +36,7 @@
   /* NAV */
   nav { background: var(--white); border-bottom: 1px solid var(--border); padding: 0 2rem; height: 60px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow-sm); }
   .nav-brand { display: flex; align-items: center; gap: 0.6rem; font-weight: 800; font-size: 1.05rem; color: var(--text); text-decoration: none; }
-  .nav-logo {
-  width: 38px;
-  height: 38px;
-  object-fit: contain;
-  border-radius: 8px;
-}
+  .nav-logo { width: 38px; height: 38px; object-fit: contain; border-radius: 8px; }
   .nav-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; background: var(--blue-light); color: var(--blue); padding: 0.18rem 0.55rem; border-radius: 100px; font-weight: 500; border: 1px solid rgba(37,99,235,0.18); }
   .nav-links { display: flex; gap: 0.2rem; }
   .nav-links a { font-size: 0.83rem; font-weight: 500; color: var(--muted); text-decoration: none; padding: 0.38rem 0.8rem; border-radius: var(--radius-sm); transition: background 0.15s, color 0.15s; }
@@ -81,7 +76,6 @@
   .card-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-bottom: 0.9rem; }
   .tag { font-size: 0.65rem; font-weight: 500; padding: 0.2rem 0.5rem; border-radius: 100px; border: 1px solid var(--border); color: var(--muted); background: var(--bg); }
 
-  /* icon bg colors */
   .c1 .card-icon-wrap { background: #eff6ff; } .c2 .card-icon-wrap { background: #fef2f2; }
   .c3 .card-icon-wrap { background: #f0fdf4; } .c4 .card-icon-wrap { background: #fefce8; }
   .c5 .card-icon-wrap { background: #f5f3ff; } .c6 .card-icon-wrap { background: #fff7ed; }
@@ -95,7 +89,7 @@
   .card-details.open { display: block; animation: expandIn 0.22s ease; }
   @keyframes expandIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
 
-  .detail-block { margin-bottom: 1.1rem; }
+  .detail-block { margin-bottom: 1.2rem; }
   .detail-label { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--light); margin-bottom: 0.55rem; display: block; }
   .feat-list { list-style: none; display: flex; flex-direction: column; gap: 0.28rem; }
   .feat-list li { font-size: 0.8rem; color: var(--text); display: flex; align-items: flex-start; gap: 0.45rem; line-height: 1.5; }
@@ -106,11 +100,48 @@
   .db-table-name { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; font-weight: 500; color: var(--text); margin-bottom: 0.2rem; }
   .db-table-cols { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--muted); line-height: 1.55; word-break: break-word; }
 
-  .api-list { display: flex; flex-direction: column; gap: 0.3rem; }
-  .api-item { display: flex; align-items: center; gap: 0.55rem; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; padding: 0.42rem 0.7rem; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text); }
-  .method { font-size: 0.58rem; font-weight: 700; padding: 0.16rem 0.42rem; border-radius: 4px; min-width: 42px; text-align: center; letter-spacing: 0.05em; flex-shrink: 0; }
+  /* ENHANCED API LIST */
+  .api-list { display: flex; flex-direction: column; gap: 0.55rem; }
+  .api-item { border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; background: var(--white); }
+  .api-item-header { display: flex; align-items: center; gap: 0.6rem; padding: 0.5rem 0.75rem; cursor: pointer; background: var(--bg); transition: background 0.15s; user-select: none; }
+  .api-item-header:hover { background: #eef0f7; }
+  .method { font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; font-weight: 700; padding: 0.16rem 0.42rem; border-radius: 4px; min-width: 46px; text-align: center; letter-spacing: 0.05em; flex-shrink: 0; }
   .GET { background: #dcfce7; color: #15803d; } .POST { background: #dbeafe; color: #1d4ed8; }
   .PUT { background: #fef9c3; color: #a16207; } .DELETE { background: #fee2e2; color: #b91c1c; }
+  .api-path { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--text); flex: 1; }
+  .api-toggle { font-size: 0.6rem; color: var(--light); margin-left: auto; transition: transform 0.2s; }
+  .api-toggle.open { transform: rotate(180deg); }
+  .api-auth-badge { font-size: 0.6rem; font-weight: 600; padding: 0.12rem 0.45rem; border-radius: 100px; background: #fef3c7; color: #92400e; border: 1px solid #fde68a; flex-shrink: 0; }
+  .api-auth-badge.public { background: #f0fdf4; color: #166534; border-color: #bbf7d0; }
+
+  .api-body { display: none; padding: 0.85rem 0.9rem; border-top: 1px solid var(--border); background: var(--white); }
+  .api-body.open { display: block; animation: expandIn 0.18s ease; }
+
+  .api-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.55; margin-bottom: 0.75rem; }
+
+  .api-section-title { font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--light); margin-bottom: 0.4rem; margin-top: 0.65rem; }
+  .api-section-title:first-child { margin-top: 0; }
+
+  .code-block { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; background: #1e2030; color: #c8d3f5; border-radius: 6px; padding: 0.75rem 0.85rem; line-height: 1.65; white-space: pre; overflow-x: auto; }
+  .code-block .key { color: #86e1fc; }
+  .code-block .val-str { color: #c3e88d; }
+  .code-block .val-num { color: #ff9e64; }
+  .code-block .val-bool { color: #ff9e64; }
+  .code-block .comment { color: #565f89; }
+  .code-block .val-null { color: #ff9e64; }
+
+  .response-tabs { display: flex; gap: 0.3rem; margin-bottom: 0.5rem; }
+  .rtab { font-size: 0.62rem; font-weight: 600; padding: 0.22rem 0.6rem; border-radius: 100px; border: 1px solid var(--border); color: var(--muted); background: var(--bg); cursor: pointer; transition: all 0.15s; }
+  .rtab.active { background: var(--green-light); color: var(--green); border-color: #86efac; }
+  .rtab.err { }
+  .rtab.active.err { background: #fee2e2; color: var(--red); border-color: #fca5a5; }
+
+  .res-block { display: none; }
+  .res-block.active { display: block; }
+
+  .notes-list { list-style: none; display: flex; flex-direction: column; gap: 0.22rem; }
+  .notes-list li { font-size: 0.74rem; color: var(--muted); display: flex; align-items: flex-start; gap: 0.4rem; line-height: 1.5; }
+  .notes-list li::before { content: '→'; font-size: 0.65rem; color: var(--blue); margin-top: 0.08rem; flex-shrink: 0; }
 
   /* CARD FOOTER */
   .card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 0.9rem; }
@@ -151,7 +182,6 @@
   .footer-brand span { color: var(--blue); }
   .footer-copy { font-size: 0.75rem; color: var(--light); }
 
-  /* ANIMATIONS */
   @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
   .fade-up { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
   .fade-up.visible { opacity: 1; transform: translateY(0); }
@@ -170,10 +200,9 @@
 
 <nav>
   <a class="nav-brand" href="#">
-   <img src="solete-logo.jpg" alt="Solete Logo" class="nav-logo">
+    <img src="solete-logo.jpg" alt="Solete Logo" class="nav-logo">
     Solete
-    <span class="nav-tag">Hackathon 2026
-    </span>
+    <span class="nav-tag">Hackathon 2026</span>
   </a>
   <div class="nav-links">
     <a href="#projects">Projects</a>
@@ -205,18 +234,18 @@
     </div>
   </div>
 
-  <!-- PROJECTS -->
   <div id="projects">
     <div class="sec-header fade-up">
       <div>
         <div class="sec-title">Project Tracks</div>
-        <div class="sec-sub">Click "View Details" on any card to see features, schema, and API routes</div>
+        <div class="sec-sub">Click "View Details" → then click any endpoint to see full request/response specs</div>
       </div>
       <span class="count-badge">10 projects</span>
     </div>
 
     <div class="projects-grid">
 
+      <!-- ===================== PROJECT 1 ===================== -->
       <div class="card c1 fade-up">
         <div class="card-top"><div class="card-icon-wrap">✅</div><span class="card-num">#01</span></div>
         <h3>Smart Todo Manager</h3>
@@ -243,16 +272,190 @@
             </div>
           </div>
           <div class="detail-block">
-            <span class="detail-label">API Endpoints</span>
+            <span class="detail-label">API Endpoints — click any to expand</span>
             <div class="api-list">
-              <div class="api-item"><span class="method POST">POST</span>/signup</div>
-              <div class="api-item"><span class="method POST">POST</span>/login</div>
-              <div class="api-item"><span class="method POST">POST</span>/create-todo</div>
-              <div class="api-item"><span class="method GET">GET</span>/get-todos</div>
-              <div class="api-item"><span class="method PUT">PUT</span>/update-todo/&lt;id&gt;</div>
-              <div class="api-item"><span class="method DELETE">DELETE</span>/delete-todo/&lt;id&gt;</div>
-              <div class="api-item"><span class="method PUT">PUT</span>/complete-todo/&lt;id&gt;</div>
-              <div class="api-item"><span class="method GET">GET</span>/productivity-score</div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method POST">POST</span>
+                  <span class="api-path">/signup</span>
+                  <span class="api-auth-badge public">Public</span>
+                  <span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Register a new user account. Password is hashed with bcrypt before storing.</div>
+                  <div class="api-section-title">Request Body (JSON)</div>
+                  <div class="code-block"><span class="key">"username"</span>: <span class="val-str">"john_doe"</span>,
+<span class="key">"email"</span>:    <span class="val-str">"john@example.com"</span>,
+<span class="key">"password"</span>: <span class="val-str">"SecurePass123"</span></div>
+                  <div class="api-section-title">Success Response — 201</div>
+                  <div class="code-block"><span class="key">"message"</span>: <span class="val-str">"User registered successfully"</span>,
+<span class="key">"user_id"</span>: <span class="val-num">1</span></div>
+                  <div class="api-section-title">Error Responses</div>
+                  <div class="code-block"><span class="comment">// 400 — missing fields</span>
+<span class="key">"error"</span>: <span class="val-str">"All fields are required"</span>
+
+<span class="comment">// 409 — email already exists</span>
+<span class="key">"error"</span>: <span class="val-str">"Email already registered"</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method POST">POST</span>
+                  <span class="api-path">/login</span>
+                  <span class="api-auth-badge public">Public</span>
+                  <span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Authenticate user and return a JWT token valid for 24 hours.</div>
+                  <div class="api-section-title">Request Body (JSON)</div>
+                  <div class="code-block"><span class="key">"email"</span>:    <span class="val-str">"john@example.com"</span>,
+<span class="key">"password"</span>: <span class="val-str">"SecurePass123"</span></div>
+                  <div class="api-section-title">Success Response — 200</div>
+                  <div class="code-block"><span class="key">"token"</span>:    <span class="val-str">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."</span>,
+<span class="key">"user_id"</span>: <span class="val-num">1</span>,
+<span class="key">"username"</span>:<span class="val-str">"john_doe"</span></div>
+                  <div class="api-section-title">Error Responses</div>
+                  <div class="code-block"><span class="comment">// 401 — wrong credentials</span>
+<span class="key">"error"</span>: <span class="val-str">"Invalid email or password"</span></div>
+                  <div class="api-section-title">Notes</div>
+                  <ul class="notes-list"><li>Send token as <code>Authorization: Bearer &lt;token&gt;</code> in all protected routes</li></ul>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method POST">POST</span>
+                  <span class="api-path">/create-todo</span>
+                  <span class="api-auth-badge">🔒 JWT</span>
+                  <span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Create a new todo for the logged-in user. Status defaults to "Pending".</div>
+                  <div class="api-section-title">Request Body (JSON)</div>
+                  <div class="code-block"><span class="key">"title"</span>:       <span class="val-str">"Buy groceries"</span>,
+<span class="key">"description"</span>: <span class="val-str">"Milk, eggs, bread"</span>,
+<span class="key">"priority"</span>:    <span class="val-str">"High"</span>,       <span class="comment">// High | Medium | Low</span>
+<span class="key">"due_date"</span>:    <span class="val-str">"2026-06-01"</span></div>
+                  <div class="api-section-title">Success Response — 201</div>
+                  <div class="code-block"><span class="key">"message"</span>: <span class="val-str">"Todo created"</span>,
+<span class="key">"todo_id"</span>: <span class="val-num">5</span></div>
+                  <div class="api-section-title">Error Responses</div>
+                  <div class="code-block"><span class="comment">// 400 — title missing</span>
+<span class="key">"error"</span>: <span class="val-str">"Title is required"</span>
+<span class="comment">// 401 — no/invalid token</span>
+<span class="key">"error"</span>: <span class="val-str">"Unauthorized"</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method GET">GET</span>
+                  <span class="api-path">/get-todos</span>
+                  <span class="api-auth-badge">🔒 JWT</span>
+                  <span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Fetch all todos belonging to the logged-in user, sorted by created_at descending.</div>
+                  <div class="api-section-title">Query Params (optional)</div>
+                  <div class="code-block"><span class="key">?priority</span>=High      <span class="comment">// filter by priority</span>
+<span class="key">?status</span>=Pending    <span class="comment">// filter by status</span></div>
+                  <div class="api-section-title">Success Response — 200</div>
+                  <div class="code-block"><span class="key">"todos"</span>: [
+  {
+    <span class="key">"todo_id"</span>:     <span class="val-num">5</span>,
+    <span class="key">"title"</span>:       <span class="val-str">"Buy groceries"</span>,
+    <span class="key">"description"</span>: <span class="val-str">"Milk, eggs, bread"</span>,
+    <span class="key">"priority"</span>:    <span class="val-str">"High"</span>,
+    <span class="key">"status"</span>:      <span class="val-str">"Pending"</span>,
+    <span class="key">"due_date"</span>:    <span class="val-str">"2026-06-01"</span>,
+    <span class="key">"created_at"</span>:  <span class="val-str">"2026-05-13T10:00:00"</span>
+  }
+]</div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method PUT">PUT</span>
+                  <span class="api-path">/update-todo/&lt;id&gt;</span>
+                  <span class="api-auth-badge">🔒 JWT</span>
+                  <span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Update title, description, priority, or due_date of a specific todo. Only the owner can update.</div>
+                  <div class="api-section-title">URL Param</div>
+                  <div class="code-block"><span class="key">id</span> — todo_id of the record to update</div>
+                  <div class="api-section-title">Request Body (JSON) — all fields optional</div>
+                  <div class="code-block"><span class="key">"title"</span>:       <span class="val-str">"Buy groceries & veggies"</span>,
+<span class="key">"priority"</span>:    <span class="val-str">"Medium"</span>,
+<span class="key">"due_date"</span>:    <span class="val-str">"2026-06-05"</span></div>
+                  <div class="api-section-title">Success Response — 200</div>
+                  <div class="code-block"><span class="key">"message"</span>: <span class="val-str">"Todo updated successfully"</span></div>
+                  <div class="api-section-title">Error Responses</div>
+                  <div class="code-block"><span class="comment">// 404 — todo not found</span>
+<span class="key">"error"</span>: <span class="val-str">"Todo not found"</span>
+<span class="comment">// 403 — not the owner</span>
+<span class="key">"error"</span>: <span class="val-str">"Access denied"</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method DELETE">DELETE</span>
+                  <span class="api-path">/delete-todo/&lt;id&gt;</span>
+                  <span class="api-auth-badge">🔒 JWT</span>
+                  <span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Permanently delete a todo by its ID. Only the owner can delete.</div>
+                  <div class="api-section-title">URL Param</div>
+                  <div class="code-block"><span class="key">id</span> — todo_id to delete</div>
+                  <div class="api-section-title">Success Response — 200</div>
+                  <div class="code-block"><span class="key">"message"</span>: <span class="val-str">"Todo deleted successfully"</span></div>
+                  <div class="api-section-title">Error Responses</div>
+                  <div class="code-block"><span class="comment">// 404</span>
+<span class="key">"error"</span>: <span class="val-str">"Todo not found"</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method PUT">PUT</span>
+                  <span class="api-path">/complete-todo/&lt;id&gt;</span>
+                  <span class="api-auth-badge">🔒 JWT</span>
+                  <span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Mark a todo as "Completed". Toggles status — if already Completed, sets back to Pending.</div>
+                  <div class="api-section-title">URL Param</div>
+                  <div class="code-block"><span class="key">id</span> — todo_id to mark complete</div>
+                  <div class="api-section-title">Success Response — 200</div>
+                  <div class="code-block"><span class="key">"message"</span>: <span class="val-str">"Todo marked as Completed"</span>,
+<span class="key">"status"</span>:  <span class="val-str">"Completed"</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method GET">GET</span>
+                  <span class="api-path">/productivity-score</span>
+                  <span class="api-auth-badge">🔒 JWT</span>
+                  <span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Returns a productivity score: percentage of todos marked Completed out of total todos created by the user.</div>
+                  <div class="api-section-title">Success Response — 200</div>
+                  <div class="code-block"><span class="key">"total_todos"</span>:     <span class="val-num">20</span>,
+<span class="key">"completed"</span>:       <span class="val-num">14</span>,
+<span class="key">"pending"</span>:         <span class="val-num">6</span>,
+<span class="key">"score_percent"</span>:   <span class="val-num">70.0</span></div>
+                  <div class="api-section-title">Notes</div>
+                  <ul class="notes-list"><li>Score = (completed / total) × 100, rounded to 1 decimal place</li></ul>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
@@ -262,6 +465,7 @@
         </div>
       </div>
 
+      <!-- ===================== PROJECT 2 ===================== -->
       <div class="card c2 fade-up">
         <div class="card-top"><div class="card-icon-wrap">🔥</div><span class="card-num">#02</span></div>
         <h3>Habit Tracker</h3>
@@ -289,15 +493,122 @@
             </div>
           </div>
           <div class="detail-block">
-            <span class="detail-label">API Endpoints</span>
+            <span class="detail-label">API Endpoints — click any to expand</span>
             <div class="api-list">
-              <div class="api-item"><span class="method POST">POST</span>/signup</div>
-              <div class="api-item"><span class="method POST">POST</span>/login</div>
-              <div class="api-item"><span class="method POST">POST</span>/create-habit</div>
-              <div class="api-item"><span class="method GET">GET</span>/get-habits</div>
-              <div class="api-item"><span class="method POST">POST</span>/habit-checkin/&lt;habit_id&gt;</div>
-              <div class="api-item"><span class="method GET">GET</span>/habit-streak/&lt;habit_id&gt;</div>
-              <div class="api-item"><span class="method DELETE">DELETE</span>/delete-habit/&lt;habit_id&gt;</div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method POST">POST</span><span class="api-path">/signup</span>
+                  <span class="api-auth-badge public">Public</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Register a new user. Email must be unique.</div>
+                  <div class="api-section-title">Request Body</div>
+                  <div class="code-block"><span class="key">"username"</span>: <span class="val-str">"alice"</span>,
+<span class="key">"email"</span>:    <span class="val-str">"alice@mail.com"</span>,
+<span class="key">"password"</span>: <span class="val-str">"Pass@2026"</span></div>
+                  <div class="api-section-title">Success — 201</div>
+                  <div class="code-block"><span class="key">"message"</span>: <span class="val-str">"User registered successfully"</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method POST">POST</span><span class="api-path">/login</span>
+                  <span class="api-auth-badge public">Public</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Login and receive a JWT token.</div>
+                  <div class="api-section-title">Request Body</div>
+                  <div class="code-block"><span class="key">"email"</span>:    <span class="val-str">"alice@mail.com"</span>,
+<span class="key">"password"</span>: <span class="val-str">"Pass@2026"</span></div>
+                  <div class="api-section-title">Success — 200</div>
+                  <div class="code-block"><span class="key">"token"</span>: <span class="val-str">"eyJ..."</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method POST">POST</span><span class="api-path">/create-habit</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Create a new habit with a title and target number of days to complete it.</div>
+                  <div class="api-section-title">Request Body</div>
+                  <div class="code-block"><span class="key">"title"</span>:       <span class="val-str">"Exercise daily"</span>,
+<span class="key">"target_days"</span>: <span class="val-num">30</span></div>
+                  <div class="api-section-title">Success — 201</div>
+                  <div class="code-block"><span class="key">"message"</span>:  <span class="val-str">"Habit created"</span>,
+<span class="key">"habit_id"</span>: <span class="val-num">3</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method GET">GET</span><span class="api-path">/get-habits</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Get all habits for the logged-in user including their check-in count and progress.</div>
+                  <div class="api-section-title">Success — 200</div>
+                  <div class="code-block"><span class="key">"habits"</span>: [
+  {
+    <span class="key">"habit_id"</span>:    <span class="val-num">3</span>,
+    <span class="key">"title"</span>:      <span class="val-str">"Exercise daily"</span>,
+    <span class="key">"target_days"</span>:<span class="val-num">30</span>,
+    <span class="key">"checkins"</span>:   <span class="val-num">12</span>,
+    <span class="key">"progress"</span>:   <span class="val-str">"40%"</span>
+  }
+]</div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method POST">POST</span><span class="api-path">/habit-checkin/&lt;habit_id&gt;</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Log today's check-in for a habit. Only one check-in allowed per habit per day.</div>
+                  <div class="api-section-title">URL Param</div>
+                  <div class="code-block"><span class="key">habit_id</span> — ID of the habit to check in</div>
+                  <div class="api-section-title">Success — 201</div>
+                  <div class="code-block"><span class="key">"message"</span>:        <span class="val-str">"Check-in recorded"</span>,
+<span class="key">"completed_date"</span>:<span class="val-str">"2026-05-13"</span></div>
+                  <div class="api-section-title">Error</div>
+                  <div class="code-block"><span class="comment">// 409 — already checked in today</span>
+<span class="key">"error"</span>: <span class="val-str">"Already checked in today"</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method GET">GET</span><span class="api-path">/habit-streak/&lt;habit_id&gt;</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Calculate the current consecutive-day streak for a habit. Streak breaks if any day is missed.</div>
+                  <div class="api-section-title">Success — 200</div>
+                  <div class="code-block"><span class="key">"habit_id"</span>:      <span class="val-num">3</span>,
+<span class="key">"title"</span>:         <span class="val-str">"Exercise daily"</span>,
+<span class="key">"current_streak"</span>:<span class="val-num">7</span>,   <span class="comment">// days</span>
+<span class="key">"longest_streak"</span>:<span class="val-num">14</span>,
+<span class="key">"total_checkins"</span>:<span class="val-num">22</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method DELETE">DELETE</span><span class="api-path">/delete-habit/&lt;habit_id&gt;</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Delete a habit and all its associated check-in logs permanently.</div>
+                  <div class="api-section-title">Success — 200</div>
+                  <div class="code-block"><span class="key">"message"</span>: <span class="val-str">"Habit deleted successfully"</span></div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
@@ -307,6 +618,7 @@
         </div>
       </div>
 
+      <!-- ===================== PROJECT 3 ===================== -->
       <div class="card c3 fade-up">
         <div class="card-top"><div class="card-icon-wrap">💰</div><span class="card-num">#03</span></div>
         <h3>Expense Tracker</h3>
@@ -333,16 +645,147 @@
             </div>
           </div>
           <div class="detail-block">
-            <span class="detail-label">API Endpoints</span>
+            <span class="detail-label">API Endpoints — click any to expand</span>
             <div class="api-list">
-              <div class="api-item"><span class="method POST">POST</span>/signup</div>
-              <div class="api-item"><span class="method POST">POST</span>/login</div>
-              <div class="api-item"><span class="method POST">POST</span>/add-transaction</div>
-              <div class="api-item"><span class="method GET">GET</span>/get-transactions</div>
-              <div class="api-item"><span class="method PUT">PUT</span>/update-transaction/&lt;id&gt;</div>
-              <div class="api-item"><span class="method DELETE">DELETE</span>/delete-transaction/&lt;id&gt;</div>
-              <div class="api-item"><span class="method GET">GET</span>/monthly-report</div>
-              <div class="api-item"><span class="method GET">GET</span>/total-balance</div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method POST">POST</span><span class="api-path">/signup</span>
+                  <span class="api-auth-badge public">Public</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Register new user account.</div>
+                  <div class="api-section-title">Request Body</div>
+                  <div class="code-block"><span class="key">"username"</span>: <span class="val-str">"bob"</span>,
+<span class="key">"email"</span>:    <span class="val-str">"bob@mail.com"</span>,
+<span class="key">"password"</span>: <span class="val-str">"Bob@2026"</span></div>
+                  <div class="api-section-title">Success — 201</div>
+                  <div class="code-block"><span class="key">"message"</span>: <span class="val-str">"User registered successfully"</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method POST">POST</span><span class="api-path">/login</span>
+                  <span class="api-auth-badge public">Public</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Login and receive JWT token.</div>
+                  <div class="api-section-title">Request Body</div>
+                  <div class="code-block"><span class="key">"email"</span>:    <span class="val-str">"bob@mail.com"</span>,
+<span class="key">"password"</span>: <span class="val-str">"Bob@2026"</span></div>
+                  <div class="api-section-title">Success — 200</div>
+                  <div class="code-block"><span class="key">"token"</span>: <span class="val-str">"eyJ..."</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method POST">POST</span><span class="api-path">/add-transaction</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Add an income or expense transaction for the current user.</div>
+                  <div class="api-section-title">Request Body</div>
+                  <div class="code-block"><span class="key">"amount"</span>:   <span class="val-num">500.00</span>,
+<span class="key">"type"</span>:     <span class="val-str">"Expense"</span>,   <span class="comment">// "Income" | "Expense"</span>
+<span class="key">"category"</span>: <span class="val-str">"Food"</span>,      <span class="comment">// Food|Travel|Bills|Shopping|Other</span>
+<span class="key">"note"</span>:     <span class="val-str">"Dinner at restaurant"</span></div>
+                  <div class="api-section-title">Success — 201</div>
+                  <div class="code-block"><span class="key">"message"</span>:        <span class="val-str">"Transaction added"</span>,
+<span class="key">"transaction_id"</span>:<span class="val-num">11</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method GET">GET</span><span class="api-path">/get-transactions</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Retrieve all transactions for the user with optional filters.</div>
+                  <div class="api-section-title">Query Params (optional)</div>
+                  <div class="code-block"><span class="key">?type</span>=Expense
+<span class="key">?category</span>=Food
+<span class="key">?from</span>=2026-05-01&amp;<span class="key">to</span>=2026-05-31</div>
+                  <div class="api-section-title">Success — 200</div>
+                  <div class="code-block"><span class="key">"transactions"</span>: [
+  {
+    <span class="key">"transaction_id"</span>: <span class="val-num">11</span>,
+    <span class="key">"amount"</span>:          <span class="val-num">500.00</span>,
+    <span class="key">"type"</span>:            <span class="val-str">"Expense"</span>,
+    <span class="key">"category"</span>:       <span class="val-str">"Food"</span>,
+    <span class="key">"note"</span>:           <span class="val-str">"Dinner at restaurant"</span>,
+    <span class="key">"created_at"</span>:     <span class="val-str">"2026-05-13"</span>
+  }
+]</div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method PUT">PUT</span><span class="api-path">/update-transaction/&lt;id&gt;</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Update any field of an existing transaction. All fields are optional.</div>
+                  <div class="api-section-title">Request Body (all optional)</div>
+                  <div class="code-block"><span class="key">"amount"</span>:   <span class="val-num">450.00</span>,
+<span class="key">"category"</span>: <span class="val-str">"Travel"</span>,
+<span class="key">"note"</span>:     <span class="val-str">"Updated note"</span></div>
+                  <div class="api-section-title">Success — 200</div>
+                  <div class="code-block"><span class="key">"message"</span>: <span class="val-str">"Transaction updated"</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method DELETE">DELETE</span><span class="api-path">/delete-transaction/&lt;id&gt;</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Delete a specific transaction permanently.</div>
+                  <div class="api-section-title">Success — 200</div>
+                  <div class="code-block"><span class="key">"message"</span>: <span class="val-str">"Transaction deleted"</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method GET">GET</span><span class="api-path">/monthly-report</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Returns income, expense, and net totals grouped by category for a given month.</div>
+                  <div class="api-section-title">Query Params</div>
+                  <div class="code-block"><span class="key">?month</span>=5&amp;<span class="key">year</span>=2026   <span class="comment">// defaults to current month</span></div>
+                  <div class="api-section-title">Success — 200</div>
+                  <div class="code-block"><span class="key">"month"</span>:        <span class="val-str">"May 2026"</span>,
+<span class="key">"total_income"</span>: <span class="val-num">50000.00</span>,
+<span class="key">"total_expense"</span>:<span class="val-num">18500.00</span>,
+<span class="key">"net_savings"</span>:  <span class="val-num">31500.00</span>,
+<span class="key">"by_category"</span>: {
+  <span class="key">"Food"</span>:    <span class="val-num">3200.00</span>,
+  <span class="key">"Travel"</span>:  <span class="val-num">5000.00</span>,
+  <span class="key">"Bills"</span>:   <span class="val-num">10300.00</span>
+}</div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method GET">GET</span><span class="api-path">/total-balance</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Returns cumulative balance: sum of all income minus sum of all expenses.</div>
+                  <div class="api-section-title">Success — 200</div>
+                  <div class="code-block"><span class="key">"total_income"</span>:  <span class="val-num">200000.00</span>,
+<span class="key">"total_expense"</span>: <span class="val-num">82000.00</span>,
+<span class="key">"balance"</span>:       <span class="val-num">118000.00</span></div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
@@ -352,6 +795,7 @@
         </div>
       </div>
 
+      <!-- ===================== PROJECT 4 ===================== -->
       <div class="card c4 fade-up">
         <div class="card-top"><div class="card-icon-wrap">📝</div><span class="card-num">#04</span></div>
         <h3>Notes Management System</h3>
@@ -376,16 +820,131 @@
             </div>
           </div>
           <div class="detail-block">
-            <span class="detail-label">API Endpoints</span>
+            <span class="detail-label">API Endpoints — click any to expand</span>
             <div class="api-list">
-              <div class="api-item"><span class="method POST">POST</span>/signup</div>
-              <div class="api-item"><span class="method POST">POST</span>/login</div>
-              <div class="api-item"><span class="method POST">POST</span>/create-note</div>
-              <div class="api-item"><span class="method GET">GET</span>/get-notes</div>
-              <div class="api-item"><span class="method PUT">PUT</span>/update-note/&lt;id&gt;</div>
-              <div class="api-item"><span class="method DELETE">DELETE</span>/delete-note/&lt;id&gt;</div>
-              <div class="api-item"><span class="method PUT">PUT</span>/pin-note/&lt;id&gt;</div>
-              <div class="api-item"><span class="method GET">GET</span>/search-notes</div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method POST">POST</span><span class="api-path">/signup</span>
+                  <span class="api-auth-badge public">Public</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-section-title">Request Body</div>
+                  <div class="code-block"><span class="key">"username"</span>: <span class="val-str">"carol"</span>,
+<span class="key">"email"</span>:    <span class="val-str">"carol@mail.com"</span>,
+<span class="key">"password"</span>: <span class="val-str">"Carol@2026"</span></div>
+                  <div class="api-section-title">Success — 201</div>
+                  <div class="code-block"><span class="key">"message"</span>: <span class="val-str">"User registered successfully"</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method POST">POST</span><span class="api-path">/login</span>
+                  <span class="api-auth-badge public">Public</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-section-title">Request Body</div>
+                  <div class="code-block"><span class="key">"email"</span>: <span class="val-str">"carol@mail.com"</span>,
+<span class="key">"password"</span>: <span class="val-str">"Carol@2026"</span></div>
+                  <div class="api-section-title">Success — 200</div>
+                  <div class="code-block"><span class="key">"token"</span>: <span class="val-str">"eyJ..."</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method POST">POST</span><span class="api-path">/create-note</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Create a new note. is_pinned defaults to false.</div>
+                  <div class="api-section-title">Request Body</div>
+                  <div class="code-block"><span class="key">"title"</span>:       <span class="val-str">"Meeting notes"</span>,
+<span class="key">"description"</span>: <span class="val-str">"Discussed Q3 roadmap..."</span></div>
+                  <div class="api-section-title">Success — 201</div>
+                  <div class="code-block"><span class="key">"message"</span>: <span class="val-str">"Note created"</span>,
+<span class="key">"note_id"</span>: <span class="val-num">7</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method GET">GET</span><span class="api-path">/get-notes</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Get all notes. Pinned notes are returned first, then sorted by created_at descending.</div>
+                  <div class="api-section-title">Success — 200</div>
+                  <div class="code-block"><span class="key">"notes"</span>: [
+  {
+    <span class="key">"note_id"</span>:     <span class="val-num">7</span>,
+    <span class="key">"title"</span>:       <span class="val-str">"Meeting notes"</span>,
+    <span class="key">"description"</span>: <span class="val-str">"Discussed Q3 roadmap..."</span>,
+    <span class="key">"is_pinned"</span>:   <span class="val-bool">false</span>,
+    <span class="key">"created_at"</span>:  <span class="val-str">"2026-05-13T09:30:00"</span>
+  }
+]</div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method PUT">PUT</span><span class="api-path">/update-note/&lt;id&gt;</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Edit a note's title or description.</div>
+                  <div class="api-section-title">Request Body (all optional)</div>
+                  <div class="code-block"><span class="key">"title"</span>:       <span class="val-str">"Updated title"</span>,
+<span class="key">"description"</span>: <span class="val-str">"Updated content"</span></div>
+                  <div class="api-section-title">Success — 200</div>
+                  <div class="code-block"><span class="key">"message"</span>: <span class="val-str">"Note updated"</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method DELETE">DELETE</span><span class="api-path">/delete-note/&lt;id&gt;</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Permanently delete a note.</div>
+                  <div class="api-section-title">Success — 200</div>
+                  <div class="code-block"><span class="key">"message"</span>: <span class="val-str">"Note deleted"</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method PUT">PUT</span><span class="api-path">/pin-note/&lt;id&gt;</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Toggle pin status of a note. Pinned notes appear at the top of the list.</div>
+                  <div class="api-section-title">Success — 200</div>
+                  <div class="code-block"><span class="key">"message"</span>:   <span class="val-str">"Note pinned"</span>,
+<span class="key">"is_pinned"</span>: <span class="val-bool">true</span></div>
+                  <div class="api-section-title">Notes</div>
+                  <ul class="notes-list"><li>Calling again on a pinned note sets is_pinned back to false</li></ul>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method GET">GET</span><span class="api-path">/search-notes</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Full-text search across title and description fields (case-insensitive).</div>
+                  <div class="api-section-title">Query Param</div>
+                  <div class="code-block"><span class="key">?q</span>=roadmap</div>
+                  <div class="api-section-title">Success — 200</div>
+                  <div class="code-block"><span class="key">"results"</span>: [ <span class="comment">/* matching notes array */</span> ],
+<span class="key">"count"</span>:   <span class="val-num">2</span></div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
@@ -395,6 +954,7 @@
         </div>
       </div>
 
+      <!-- ===================== PROJECT 5 ===================== -->
       <div class="card c5 fade-up">
         <div class="card-top"><div class="card-icon-wrap">🎓</div><span class="card-num">#05</span></div>
         <h3>Student Task Planner</h3>
@@ -421,15 +981,118 @@
             </div>
           </div>
           <div class="detail-block">
-            <span class="detail-label">API Endpoints</span>
+            <span class="detail-label">API Endpoints — click any to expand</span>
             <div class="api-list">
-              <div class="api-item"><span class="method POST">POST</span>/signup</div>
-              <div class="api-item"><span class="method POST">POST</span>/login</div>
-              <div class="api-item"><span class="method POST">POST</span>/create-subject</div>
-              <div class="api-item"><span class="method POST">POST</span>/add-assignment</div>
-              <div class="api-item"><span class="method GET">GET</span>/get-assignments</div>
-              <div class="api-item"><span class="method PUT">PUT</span>/complete-assignment/&lt;id&gt;</div>
-              <div class="api-item"><span class="method DELETE">DELETE</span>/delete-assignment/&lt;id&gt;</div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method POST">POST</span><span class="api-path">/signup</span>
+                  <span class="api-auth-badge public">Public</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-section-title">Request Body</div>
+                  <div class="code-block"><span class="key">"username"</span>: <span class="val-str">"dave"</span>,
+<span class="key">"email"</span>:    <span class="val-str">"dave@college.edu"</span>,
+<span class="key">"password"</span>: <span class="val-str">"Dave@2026"</span></div>
+                  <div class="api-section-title">Success — 201</div>
+                  <div class="code-block"><span class="key">"message"</span>: <span class="val-str">"User registered successfully"</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method POST">POST</span><span class="api-path">/login</span>
+                  <span class="api-auth-badge public">Public</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-section-title">Request Body</div>
+                  <div class="code-block"><span class="key">"email"</span>: <span class="val-str">"dave@college.edu"</span>,
+<span class="key">"password"</span>: <span class="val-str">"Dave@2026"</span></div>
+                  <div class="api-section-title">Success — 200</div>
+                  <div class="code-block"><span class="key">"token"</span>: <span class="val-str">"eyJ..."</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method POST">POST</span><span class="api-path">/create-subject</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Add a new subject/course for the logged-in student.</div>
+                  <div class="api-section-title">Request Body</div>
+                  <div class="code-block"><span class="key">"subject_name"</span>: <span class="val-str">"Data Structures"</span></div>
+                  <div class="api-section-title">Success — 201</div>
+                  <div class="code-block"><span class="key">"message"</span>:    <span class="val-str">"Subject created"</span>,
+<span class="key">"subject_id"</span>: <span class="val-num">2</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method POST">POST</span><span class="api-path">/add-assignment</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Add an assignment under a specific subject. Status defaults to "Pending".</div>
+                  <div class="api-section-title">Request Body</div>
+                  <div class="code-block"><span class="key">"subject_id"</span>: <span class="val-num">2</span>,
+<span class="key">"title"</span>:      <span class="val-str">"Binary Tree Lab"</span>,
+<span class="key">"due_date"</span>:   <span class="val-str">"2026-06-10"</span></div>
+                  <div class="api-section-title">Success — 201</div>
+                  <div class="code-block"><span class="key">"message"</span>:       <span class="val-str">"Assignment added"</span>,
+<span class="key">"assignment_id"</span>: <span class="val-num">8</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method GET">GET</span><span class="api-path">/get-assignments</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Get all assignments for the user, optionally filtered by subject or status.</div>
+                  <div class="api-section-title">Query Params (optional)</div>
+                  <div class="code-block"><span class="key">?subject_id</span>=2
+<span class="key">?status</span>=Pending</div>
+                  <div class="api-section-title">Success — 200</div>
+                  <div class="code-block"><span class="key">"assignments"</span>: [
+  {
+    <span class="key">"assignment_id"</span>: <span class="val-num">8</span>,
+    <span class="key">"subject"</span>:       <span class="val-str">"Data Structures"</span>,
+    <span class="key">"title"</span>:         <span class="val-str">"Binary Tree Lab"</span>,
+    <span class="key">"due_date"</span>:      <span class="val-str">"2026-06-10"</span>,
+    <span class="key">"status"</span>:        <span class="val-str">"Pending"</span>
+  }
+]</div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method PUT">PUT</span><span class="api-path">/complete-assignment/&lt;id&gt;</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Mark an assignment as "Completed".</div>
+                  <div class="api-section-title">Success — 200</div>
+                  <div class="code-block"><span class="key">"message"</span>: <span class="val-str">"Assignment marked as Completed"</span>,
+<span class="key">"status"</span>:  <span class="val-str">"Completed"</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method DELETE">DELETE</span><span class="api-path">/delete-assignment/&lt;id&gt;</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Delete an assignment permanently.</div>
+                  <div class="api-section-title">Success — 200</div>
+                  <div class="code-block"><span class="key">"message"</span>: <span class="val-str">"Assignment deleted"</span></div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
@@ -439,6 +1102,7 @@
         </div>
       </div>
 
+      <!-- ===================== PROJECT 6 ===================== -->
       <div class="card c6 fade-up">
         <div class="card-top"><div class="card-icon-wrap">🔖</div><span class="card-num">#06</span></div>
         <h3>Bookmark Saver API</h3>
@@ -464,15 +1128,118 @@
             </div>
           </div>
           <div class="detail-block">
-            <span class="detail-label">API Endpoints</span>
+            <span class="detail-label">API Endpoints — click any to expand</span>
             <div class="api-list">
-              <div class="api-item"><span class="method POST">POST</span>/signup</div>
-              <div class="api-item"><span class="method POST">POST</span>/login</div>
-              <div class="api-item"><span class="method POST">POST</span>/add-bookmark</div>
-              <div class="api-item"><span class="method GET">GET</span>/get-bookmarks</div>
-              <div class="api-item"><span class="method PUT">PUT</span>/favorite-bookmark/&lt;id&gt;</div>
-              <div class="api-item"><span class="method DELETE">DELETE</span>/delete-bookmark/&lt;id&gt;</div>
-              <div class="api-item"><span class="method GET">GET</span>/search-bookmarks</div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method POST">POST</span><span class="api-path">/signup</span>
+                  <span class="api-auth-badge public">Public</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-section-title">Request Body</div>
+                  <div class="code-block"><span class="key">"username"</span>: <span class="val-str">"eve"</span>,
+<span class="key">"email"</span>:    <span class="val-str">"eve@mail.com"</span>,
+<span class="key">"password"</span>: <span class="val-str">"Eve@2026"</span></div>
+                  <div class="api-section-title">Success — 201</div>
+                  <div class="code-block"><span class="key">"message"</span>: <span class="val-str">"User registered successfully"</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method POST">POST</span><span class="api-path">/login</span>
+                  <span class="api-auth-badge public">Public</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-section-title">Request Body</div>
+                  <div class="code-block"><span class="key">"email"</span>: <span class="val-str">"eve@mail.com"</span>,
+<span class="key">"password"</span>: <span class="val-str">"Eve@2026"</span></div>
+                  <div class="api-section-title">Success — 200</div>
+                  <div class="code-block"><span class="key">"token"</span>: <span class="val-str">"eyJ..."</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method POST">POST</span><span class="api-path">/add-bookmark</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Save a new URL with a title and optional category.</div>
+                  <div class="api-section-title">Request Body</div>
+                  <div class="code-block"><span class="key">"title"</span>:    <span class="val-str">"Flask Docs"</span>,
+<span class="key">"url"</span>:      <span class="val-str">"https://flask.palletsprojects.com"</span>,
+<span class="key">"category"</span>: <span class="val-str">"Dev Resources"</span></div>
+                  <div class="api-section-title">Success — 201</div>
+                  <div class="code-block"><span class="key">"message"</span>:     <span class="val-str">"Bookmark saved"</span>,
+<span class="key">"bookmark_id"</span>:<span class="val-num">4</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method GET">GET</span><span class="api-path">/get-bookmarks</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Get all bookmarks. Favorites are returned first.</div>
+                  <div class="api-section-title">Query Params (optional)</div>
+                  <div class="code-block"><span class="key">?category</span>=Dev Resources
+<span class="key">?favorites</span>=true</div>
+                  <div class="api-section-title">Success — 200</div>
+                  <div class="code-block"><span class="key">"bookmarks"</span>: [
+  {
+    <span class="key">"bookmark_id"</span>: <span class="val-num">4</span>,
+    <span class="key">"title"</span>:       <span class="val-str">"Flask Docs"</span>,
+    <span class="key">"url"</span>:         <span class="val-str">"https://flask.palletsprojects.com"</span>,
+    <span class="key">"category"</span>:    <span class="val-str">"Dev Resources"</span>,
+    <span class="key">"is_favorite"</span>: <span class="val-bool">false</span>
+  }
+]</div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method PUT">PUT</span><span class="api-path">/favorite-bookmark/&lt;id&gt;</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Toggle the favorite status of a bookmark.</div>
+                  <div class="api-section-title">Success — 200</div>
+                  <div class="code-block"><span class="key">"message"</span>:     <span class="val-str">"Marked as favorite"</span>,
+<span class="key">"is_favorite"</span>: <span class="val-bool">true</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method DELETE">DELETE</span><span class="api-path">/delete-bookmark/&lt;id&gt;</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Delete a saved bookmark.</div>
+                  <div class="api-section-title">Success — 200</div>
+                  <div class="code-block"><span class="key">"message"</span>: <span class="val-str">"Bookmark deleted"</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method GET">GET</span><span class="api-path">/search-bookmarks</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Search bookmarks by title, URL, or category (case-insensitive).</div>
+                  <div class="api-section-title">Query Param</div>
+                  <div class="code-block"><span class="key">?q</span>=flask</div>
+                  <div class="api-section-title">Success — 200</div>
+                  <div class="code-block"><span class="key">"results"</span>: [ <span class="comment">/* matching bookmarks */</span> ],
+<span class="key">"count"</span>:   <span class="val-num">1</span></div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
@@ -482,6 +1249,7 @@
         </div>
       </div>
 
+      <!-- ===================== PROJECT 7 ===================== -->
       <div class="card c7 fade-up">
         <div class="card-top"><div class="card-icon-wrap">🎪</div><span class="card-num">#07</span></div>
         <h3>Event Registration System</h3>
@@ -508,15 +1276,126 @@
             </div>
           </div>
           <div class="detail-block">
-            <span class="detail-label">API Endpoints</span>
+            <span class="detail-label">API Endpoints — click any to expand</span>
             <div class="api-list">
-              <div class="api-item"><span class="method POST">POST</span>/signup</div>
-              <div class="api-item"><span class="method POST">POST</span>/login</div>
-              <div class="api-item"><span class="method POST">POST</span>/create-event</div>
-              <div class="api-item"><span class="method GET">GET</span>/get-events</div>
-              <div class="api-item"><span class="method POST">POST</span>/register-event/&lt;id&gt;</div>
-              <div class="api-item"><span class="method GET">GET</span>/event-participants/&lt;id&gt;</div>
-              <div class="api-item"><span class="method DELETE">DELETE</span>/delete-event/&lt;id&gt;</div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method POST">POST</span><span class="api-path">/signup</span>
+                  <span class="api-auth-badge public">Public</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-section-title">Request Body</div>
+                  <div class="code-block"><span class="key">"username"</span>: <span class="val-str">"frank"</span>,
+<span class="key">"email"</span>:    <span class="val-str">"frank@mail.com"</span>,
+<span class="key">"password"</span>: <span class="val-str">"Frank@2026"</span></div>
+                  <div class="api-section-title">Success — 201</div>
+                  <div class="code-block"><span class="key">"message"</span>: <span class="val-str">"User registered successfully"</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method POST">POST</span><span class="api-path">/login</span>
+                  <span class="api-auth-badge public">Public</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-section-title">Request Body</div>
+                  <div class="code-block"><span class="key">"email"</span>:    <span class="val-str">"frank@mail.com"</span>,
+<span class="key">"password"</span>: <span class="val-str">"Frank@2026"</span></div>
+                  <div class="api-section-title">Success — 200</div>
+                  <div class="code-block"><span class="key">"token"</span>: <span class="val-str">"eyJ..."</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method POST">POST</span><span class="api-path">/create-event</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Create a new event as the logged-in organizer.</div>
+                  <div class="api-section-title">Request Body</div>
+                  <div class="code-block"><span class="key">"title"</span>:       <span class="val-str">"Tech Meetup 2026"</span>,
+<span class="key">"description"</span>: <span class="val-str">"Annual developer meetup"</span>,
+<span class="key">"event_date"</span>:  <span class="val-str">"2026-07-15"</span></div>
+                  <div class="api-section-title">Success — 201</div>
+                  <div class="code-block"><span class="key">"message"</span>:  <span class="val-str">"Event created"</span>,
+<span class="key">"event_id"</span>: <span class="val-num">9</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method GET">GET</span><span class="api-path">/get-events</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Get all events created by the logged-in user.</div>
+                  <div class="api-section-title">Success — 200</div>
+                  <div class="code-block"><span class="key">"events"</span>: [
+  {
+    <span class="key">"event_id"</span>:    <span class="val-num">9</span>,
+    <span class="key">"title"</span>:       <span class="val-str">"Tech Meetup 2026"</span>,
+    <span class="key">"description"</span>: <span class="val-str">"Annual developer meetup"</span>,
+    <span class="key">"event_date"</span>:  <span class="val-str">"2026-07-15"</span>,
+    <span class="key">"participants"</span>:<span class="val-num">42</span>
+  }
+]</div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method POST">POST</span><span class="api-path">/register-event/&lt;id&gt;</span>
+                  <span class="api-auth-badge public">Public</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Register an external participant for an event. No JWT required — anyone can register.</div>
+                  <div class="api-section-title">Request Body</div>
+                  <div class="code-block"><span class="key">"participant_name"</span>: <span class="val-str">"Grace Hopper"</span>,
+<span class="key">"email"</span>:             <span class="val-str">"grace@mail.com"</span></div>
+                  <div class="api-section-title">Success — 201</div>
+                  <div class="code-block"><span class="key">"message"</span>:         <span class="val-str">"Registered successfully"</span>,
+<span class="key">"registration_id"</span>: <span class="val-num">17</span></div>
+                  <div class="api-section-title">Error</div>
+                  <div class="code-block"><span class="comment">// 409 — email already registered for this event</span>
+<span class="key">"error"</span>: <span class="val-str">"Already registered"</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method GET">GET</span><span class="api-path">/event-participants/&lt;id&gt;</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Get all participants registered for a specific event. Only the organizer can view.</div>
+                  <div class="api-section-title">Success — 200</div>
+                  <div class="code-block"><span class="key">"event"</span>:        <span class="val-str">"Tech Meetup 2026"</span>,
+<span class="key">"total"</span>:        <span class="val-num">42</span>,
+<span class="key">"participants"</span>: [
+  {
+    <span class="key">"registration_id"</span>: <span class="val-num">17</span>,
+    <span class="key">"name"</span>:             <span class="val-str">"Grace Hopper"</span>,
+    <span class="key">"email"</span>:            <span class="val-str">"grace@mail.com"</span>
+  }
+]</div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method DELETE">DELETE</span><span class="api-path">/delete-event/&lt;id&gt;</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Delete an event and all its registrations. Only the organizer can delete.</div>
+                  <div class="api-section-title">Success — 200</div>
+                  <div class="code-block"><span class="key">"message"</span>: <span class="val-str">"Event deleted successfully"</span></div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
@@ -526,6 +1405,7 @@
         </div>
       </div>
 
+      <!-- ===================== PROJECT 8 ===================== -->
       <div class="card c8 fade-up">
         <div class="card-top"><div class="card-icon-wrap">📣</div><span class="card-num">#08</span></div>
         <h3>Complaint Management System</h3>
@@ -551,15 +1431,125 @@
             </div>
           </div>
           <div class="detail-block">
-            <span class="detail-label">API Endpoints</span>
+            <span class="detail-label">API Endpoints — click any to expand</span>
             <div class="api-list">
-              <div class="api-item"><span class="method POST">POST</span>/signup</div>
-              <div class="api-item"><span class="method POST">POST</span>/login</div>
-              <div class="api-item"><span class="method POST">POST</span>/create-complaint</div>
-              <div class="api-item"><span class="method GET">GET</span>/get-complaints</div>
-              <div class="api-item"><span class="method PUT">PUT</span>/update-status/&lt;id&gt;</div>
-              <div class="api-item"><span class="method DELETE">DELETE</span>/delete-complaint/&lt;id&gt;</div>
-              <div class="api-item"><span class="method GET">GET</span>/complaint-details/&lt;id&gt;</div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method POST">POST</span><span class="api-path">/signup</span>
+                  <span class="api-auth-badge public">Public</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-section-title">Request Body</div>
+                  <div class="code-block"><span class="key">"username"</span>: <span class="val-str">"hina"</span>,
+<span class="key">"email"</span>:    <span class="val-str">"hina@mail.com"</span>,
+<span class="key">"password"</span>: <span class="val-str">"Hina@2026"</span></div>
+                  <div class="api-section-title">Success — 201</div>
+                  <div class="code-block"><span class="key">"message"</span>: <span class="val-str">"User registered successfully"</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method POST">POST</span><span class="api-path">/login</span>
+                  <span class="api-auth-badge public">Public</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-section-title">Request Body</div>
+                  <div class="code-block"><span class="key">"email"</span>:    <span class="val-str">"hina@mail.com"</span>,
+<span class="key">"password"</span>: <span class="val-str">"Hina@2026"</span></div>
+                  <div class="api-section-title">Success — 200</div>
+                  <div class="code-block"><span class="key">"token"</span>: <span class="val-str">"eyJ..."</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method POST">POST</span><span class="api-path">/create-complaint</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Raise a new complaint. Status defaults to "Open".</div>
+                  <div class="api-section-title">Request Body</div>
+                  <div class="code-block"><span class="key">"title"</span>:       <span class="val-str">"Internet not working"</span>,
+<span class="key">"description"</span>: <span class="val-str">"No connectivity since 9am"</span>,
+<span class="key">"priority"</span>:    <span class="val-str">"High"</span>   <span class="comment">// High | Medium | Low</span></div>
+                  <div class="api-section-title">Success — 201</div>
+                  <div class="code-block"><span class="key">"message"</span>:      <span class="val-str">"Complaint raised"</span>,
+<span class="key">"complaint_id"</span>: <span class="val-num">13</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method GET">GET</span><span class="api-path">/get-complaints</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Get all complaints filed by the logged-in user.</div>
+                  <div class="api-section-title">Query Params (optional)</div>
+                  <div class="code-block"><span class="key">?status</span>=Open        <span class="comment">// Open | In-Progress | Resolved</span>
+<span class="key">?priority</span>=High</div>
+                  <div class="api-section-title">Success — 200</div>
+                  <div class="code-block"><span class="key">"complaints"</span>: [
+  {
+    <span class="key">"complaint_id"</span>: <span class="val-num">13</span>,
+    <span class="key">"title"</span>:        <span class="val-str">"Internet not working"</span>,
+    <span class="key">"priority"</span>:     <span class="val-str">"High"</span>,
+    <span class="key">"status"</span>:       <span class="val-str">"Open"</span>,
+    <span class="key">"created_at"</span>:   <span class="val-str">"2026-05-13"</span>
+  }
+]</div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method PUT">PUT</span><span class="api-path">/update-status/&lt;id&gt;</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Update the status of a complaint. (Admin or owner can call this.)</div>
+                  <div class="api-section-title">Request Body</div>
+                  <div class="code-block"><span class="key">"status"</span>: <span class="val-str">"In-Progress"</span>  <span class="comment">// Open | In-Progress | Resolved</span></div>
+                  <div class="api-section-title">Success — 200</div>
+                  <div class="code-block"><span class="key">"message"</span>: <span class="val-str">"Status updated to In-Progress"</span>,
+<span class="key">"status"</span>:  <span class="val-str">"In-Progress"</span></div>
+                  <div class="api-section-title">Error</div>
+                  <div class="code-block"><span class="comment">// 400 — invalid status value</span>
+<span class="key">"error"</span>: <span class="val-str">"Invalid status. Use Open | In-Progress | Resolved"</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method DELETE">DELETE</span><span class="api-path">/delete-complaint/&lt;id&gt;</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Delete a complaint permanently.</div>
+                  <div class="api-section-title">Success — 200</div>
+                  <div class="code-block"><span class="key">"message"</span>: <span class="val-str">"Complaint deleted"</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method GET">GET</span><span class="api-path">/complaint-details/&lt;id&gt;</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Get full details of a single complaint.</div>
+                  <div class="api-section-title">Success — 200</div>
+                  <div class="code-block"><span class="key">"complaint_id"</span>: <span class="val-num">13</span>,
+<span class="key">"title"</span>:         <span class="val-str">"Internet not working"</span>,
+<span class="key">"description"</span>:  <span class="val-str">"No connectivity since 9am"</span>,
+<span class="key">"priority"</span>:      <span class="val-str">"High"</span>,
+<span class="key">"status"</span>:        <span class="val-str">"In-Progress"</span>,
+<span class="key">"created_at"</span>:    <span class="val-str">"2026-05-13T09:00:00"</span></div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
@@ -569,6 +1559,7 @@
         </div>
       </div>
 
+      <!-- ===================== PROJECT 9 ===================== -->
       <div class="card c9 fade-up">
         <div class="card-top"><div class="card-icon-wrap">📔</div><span class="card-num">#09</span></div>
         <h3>Daily Journal API</h3>
@@ -594,15 +1585,122 @@
             </div>
           </div>
           <div class="detail-block">
-            <span class="detail-label">API Endpoints</span>
+            <span class="detail-label">API Endpoints — click any to expand</span>
             <div class="api-list">
-              <div class="api-item"><span class="method POST">POST</span>/signup</div>
-              <div class="api-item"><span class="method POST">POST</span>/login</div>
-              <div class="api-item"><span class="method POST">POST</span>/create-journal</div>
-              <div class="api-item"><span class="method GET">GET</span>/get-journals</div>
-              <div class="api-item"><span class="method PUT">PUT</span>/update-journal/&lt;id&gt;</div>
-              <div class="api-item"><span class="method DELETE">DELETE</span>/delete-journal/&lt;id&gt;</div>
-              <div class="api-item"><span class="method GET">GET</span>/journal-history</div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method POST">POST</span><span class="api-path">/signup</span>
+                  <span class="api-auth-badge public">Public</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-section-title">Request Body</div>
+                  <div class="code-block"><span class="key">"username"</span>: <span class="val-str">"ian"</span>,
+<span class="key">"email"</span>:    <span class="val-str">"ian@mail.com"</span>,
+<span class="key">"password"</span>: <span class="val-str">"Ian@2026"</span></div>
+                  <div class="api-section-title">Success — 201</div>
+                  <div class="code-block"><span class="key">"message"</span>: <span class="val-str">"User registered successfully"</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method POST">POST</span><span class="api-path">/login</span>
+                  <span class="api-auth-badge public">Public</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-section-title">Request Body</div>
+                  <div class="code-block"><span class="key">"email"</span>:    <span class="val-str">"ian@mail.com"</span>,
+<span class="key">"password"</span>: <span class="val-str">"Ian@2026"</span></div>
+                  <div class="api-section-title">Success — 200</div>
+                  <div class="code-block"><span class="key">"token"</span>: <span class="val-str">"eyJ..."</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method POST">POST</span><span class="api-path">/create-journal</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Write a new journal entry for today with optional mood.</div>
+                  <div class="api-section-title">Request Body</div>
+                  <div class="code-block"><span class="key">"title"</span>:   <span class="val-str">"A productive Wednesday"</span>,
+<span class="key">"content"</span>: <span class="val-str">"Finished the hackathon project..."</span>,
+<span class="key">"mood"</span>:    <span class="val-str">"Happy"</span>   <span class="comment">// Happy|Sad|Neutral|Anxious</span></div>
+                  <div class="api-section-title">Success — 201</div>
+                  <div class="code-block"><span class="key">"message"</span>:    <span class="val-str">"Journal entry created"</span>,
+<span class="key">"journal_id"</span>: <span class="val-num">6</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method GET">GET</span><span class="api-path">/get-journals</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Get all journal entries for the user, newest first.</div>
+                  <div class="api-section-title">Query Params (optional)</div>
+                  <div class="code-block"><span class="key">?mood</span>=Happy</div>
+                  <div class="api-section-title">Success — 200</div>
+                  <div class="code-block"><span class="key">"journals"</span>: [
+  {
+    <span class="key">"journal_id"</span>: <span class="val-num">6</span>,
+    <span class="key">"title"</span>:      <span class="val-str">"A productive Wednesday"</span>,
+    <span class="key">"content"</span>:    <span class="val-str">"Finished the hackathon..."</span>,
+    <span class="key">"mood"</span>:       <span class="val-str">"Happy"</span>,
+    <span class="key">"created_at"</span>: <span class="val-str">"2026-05-13"</span>
+  }
+]</div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method PUT">PUT</span><span class="api-path">/update-journal/&lt;id&gt;</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Edit a journal entry's title, content, or mood.</div>
+                  <div class="api-section-title">Request Body (all optional)</div>
+                  <div class="code-block"><span class="key">"title"</span>:   <span class="val-str">"Updated title"</span>,
+<span class="key">"content"</span>: <span class="val-str">"Updated content"</span>,
+<span class="key">"mood"</span>:    <span class="val-str">"Neutral"</span></div>
+                  <div class="api-section-title">Success — 200</div>
+                  <div class="code-block"><span class="key">"message"</span>: <span class="val-str">"Journal updated"</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method DELETE">DELETE</span><span class="api-path">/delete-journal/&lt;id&gt;</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Delete a journal entry permanently.</div>
+                  <div class="api-section-title">Success — 200</div>
+                  <div class="code-block"><span class="key">"message"</span>: <span class="val-str">"Journal deleted"</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method GET">GET</span><span class="api-path">/journal-history</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Browse journal entries filtered by a specific date or date range.</div>
+                  <div class="api-section-title">Query Params</div>
+                  <div class="code-block"><span class="key">?date</span>=2026-05-13          <span class="comment">// exact day</span>
+<span class="comment">// OR range:</span>
+<span class="key">?from</span>=2026-05-01&amp;<span class="key">to</span>=2026-05-31</div>
+                  <div class="api-section-title">Success — 200</div>
+                  <div class="code-block"><span class="key">"entries"</span>: [ <span class="comment">/* journals in range */</span> ],
+<span class="key">"count"</span>:   <span class="val-num">3</span></div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
@@ -612,9 +1710,10 @@
         </div>
       </div>
 
+      <!-- ===================== PROJECT 10 ===================== -->
       <div class="card c10 fade-up">
         <div class="card-top"><div class="card-icon-wrap">🏗️</div><span class="card-num">#10</span></div>
-        <h3>Project Management API</h3>
+        <h3>Mini Project Management API</h3>
         <p class="card-purpose">Organize projects, manage tasks with status tracking, and monitor overall project progress percentage.</p>
         <div class="card-tags"><span class="tag">JWT Auth</span><span class="tag">Projects</span><span class="tag">Tasks</span><span class="tag">Progress</span></div>
         <div class="card-details" id="d10">
@@ -638,16 +1737,141 @@
             </div>
           </div>
           <div class="detail-block">
-            <span class="detail-label">API Endpoints</span>
+            <span class="detail-label">API Endpoints — click any to expand</span>
             <div class="api-list">
-              <div class="api-item"><span class="method POST">POST</span>/signup</div>
-              <div class="api-item"><span class="method POST">POST</span>/login</div>
-              <div class="api-item"><span class="method POST">POST</span>/create-project</div>
-              <div class="api-item"><span class="method POST">POST</span>/add-task</div>
-              <div class="api-item"><span class="method GET">GET</span>/get-projects</div>
-              <div class="api-item"><span class="method PUT">PUT</span>/update-task/&lt;id&gt;</div>
-              <div class="api-item"><span class="method DELETE">DELETE</span>/delete-task/&lt;id&gt;</div>
-              <div class="api-item"><span class="method GET">GET</span>/project-progress/&lt;id&gt;</div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method POST">POST</span><span class="api-path">/signup</span>
+                  <span class="api-auth-badge public">Public</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-section-title">Request Body</div>
+                  <div class="code-block"><span class="key">"username"</span>: <span class="val-str">"jack"</span>,
+<span class="key">"email"</span>:    <span class="val-str">"jack@mail.com"</span>,
+<span class="key">"password"</span>: <span class="val-str">"Jack@2026"</span></div>
+                  <div class="api-section-title">Success — 201</div>
+                  <div class="code-block"><span class="key">"message"</span>: <span class="val-str">"User registered successfully"</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method POST">POST</span><span class="api-path">/login</span>
+                  <span class="api-auth-badge public">Public</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-section-title">Request Body</div>
+                  <div class="code-block"><span class="key">"email"</span>:    <span class="val-str">"jack@mail.com"</span>,
+<span class="key">"password"</span>: <span class="val-str">"Jack@2026"</span></div>
+                  <div class="api-section-title">Success — 200</div>
+                  <div class="code-block"><span class="key">"token"</span>: <span class="val-str">"eyJ..."</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method POST">POST</span><span class="api-path">/create-project</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Create a new project. User becomes the project owner.</div>
+                  <div class="api-section-title">Request Body</div>
+                  <div class="code-block"><span class="key">"title"</span>:       <span class="val-str">"E-commerce App"</span>,
+<span class="key">"description"</span>: <span class="val-str">"Full-stack shopping platform"</span></div>
+                  <div class="api-section-title">Success — 201</div>
+                  <div class="code-block"><span class="key">"message"</span>:    <span class="val-str">"Project created"</span>,
+<span class="key">"project_id"</span>: <span class="val-num">1</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method POST">POST</span><span class="api-path">/add-task</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Add a task to an existing project. Status defaults to "Pending".</div>
+                  <div class="api-section-title">Request Body</div>
+                  <div class="code-block"><span class="key">"project_id"</span>: <span class="val-num">1</span>,
+<span class="key">"title"</span>:       <span class="val-str">"Design homepage wireframe"</span></div>
+                  <div class="api-section-title">Success — 201</div>
+                  <div class="code-block"><span class="key">"message"</span>: <span class="val-str">"Task added"</span>,
+<span class="key">"task_id"</span>: <span class="val-num">5</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method GET">GET</span><span class="api-path">/get-projects</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Get all projects with task counts and progress summary.</div>
+                  <div class="api-section-title">Success — 200</div>
+                  <div class="code-block"><span class="key">"projects"</span>: [
+  {
+    <span class="key">"project_id"</span>:  <span class="val-num">1</span>,
+    <span class="key">"title"</span>:       <span class="val-str">"E-commerce App"</span>,
+    <span class="key">"description"</span>: <span class="val-str">"Full-stack shopping platform"</span>,
+    <span class="key">"total_tasks"</span>: <span class="val-num">10</span>,
+    <span class="key">"done_tasks"</span>:  <span class="val-num">4</span>,
+    <span class="key">"progress"</span>:    <span class="val-str">"40%"</span>
+  }
+]</div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method PUT">PUT</span><span class="api-path">/update-task/&lt;id&gt;</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Update a task's title or status.</div>
+                  <div class="api-section-title">Request Body (all optional)</div>
+                  <div class="code-block"><span class="key">"title"</span>:  <span class="val-str">"Design updated wireframe"</span>,
+<span class="key">"status"</span>: <span class="val-str">"In-Progress"</span>  <span class="comment">// Pending|In-Progress|Done</span></div>
+                  <div class="api-section-title">Success — 200</div>
+                  <div class="code-block"><span class="key">"message"</span>: <span class="val-str">"Task updated"</span></div>
+                  <div class="api-section-title">Error</div>
+                  <div class="code-block"><span class="comment">// 400 — invalid status value</span>
+<span class="key">"error"</span>: <span class="val-str">"Status must be Pending | In-Progress | Done"</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method DELETE">DELETE</span><span class="api-path">/delete-task/&lt;id&gt;</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Delete a task from a project.</div>
+                  <div class="api-section-title">Success — 200</div>
+                  <div class="code-block"><span class="key">"message"</span>: <span class="val-str">"Task deleted"</span></div>
+                </div>
+              </div>
+
+              <div class="api-item">
+                <div class="api-item-header" onclick="toggleApi(this)">
+                  <span class="method GET">GET</span><span class="api-path">/project-progress/&lt;id&gt;</span>
+                  <span class="api-auth-badge">🔒 JWT</span><span class="api-toggle">▾</span>
+                </div>
+                <div class="api-body">
+                  <div class="api-desc">Get detailed progress breakdown for a specific project.</div>
+                  <div class="api-section-title">Success — 200</div>
+                  <div class="code-block"><span class="key">"project_id"</span>:   <span class="val-num">1</span>,
+<span class="key">"title"</span>:         <span class="val-str">"E-commerce App"</span>,
+<span class="key">"total_tasks"</span>:   <span class="val-num">10</span>,
+<span class="key">"pending"</span>:       <span class="val-num">3</span>,
+<span class="key">"in_progress"</span>:   <span class="val-num">3</span>,
+<span class="key">"done"</span>:          <span class="val-num">4</span>,
+<span class="key">"progress_pct"</span>:  <span class="val-num">40.0</span></div>
+                  <div class="api-section-title">Notes</div>
+                  <ul class="notes-list"><li>progress_pct = (done / total_tasks) × 100</li><li>Returns 0% if no tasks added yet</li></ul>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
@@ -676,7 +1900,6 @@
         <div class="rule-item"><div class="rule-icon">3️⃣</div><div><div class="rule-title">Design a Frontend</div><div class="rule-desc">Create a working UI (HTML/CSS/JS or React) that connects to your API and demonstrates all core features.</div></div></div>
         <div class="rule-item"><div class="rule-icon">4️⃣</div><div><div class="rule-title">Follow the DB Schema</div><div class="rule-desc">Use the exact table and column names provided. You may add extra columns but all required fields must be present.</div></div></div>
         <div class="rule-item"><div class="rule-icon">5️⃣</div><div><div class="rule-title">AI Tools Are Allowed</div><div class="rule-desc">ChatGPT, Claude, Gemini — all fine. But during evaluation you must explain your code. If you can't, marks will be deducted.</div></div></div>
-        <!--<div class="rule-item"><div class="rule-icon">6️⃣</div><div><div class="rule-title">GitHub Submission</div><div class="rule-desc">Push to a public GitHub repo with a clear README, setup steps, and environment variable documentation.</div></div></div>-->
         <div class="rule-item"><div class="rule-icon">7️⃣</div><div><div class="rule-title">No Plagiarism</div><div class="rule-desc">AI-generated code is fine. Copy-pasting another participant's code is not allowed and will result in disqualification.</div></div></div>
         <div class="rule-item"><div class="rule-icon">🌟</div><div><div class="rule-title">Bonus Points</div><div class="rule-desc">Extra credit for live deployment (Render / Railway), a Postman collection, unit tests, and polished UI design.</div></div></div>
       </div>
@@ -726,8 +1949,15 @@
     btn.childNodes[0].textContent = open ? 'Hide Details ' : 'View Details ';
   }
 
+  function toggleApi(header) {
+    const body = header.nextElementSibling;
+    const arrow = header.querySelector('.api-toggle');
+    const isOpen = body.classList.toggle('open');
+    arrow.classList.toggle('open', isOpen);
+  }
+
   const obs = new IntersectionObserver(entries => {
-    entries.forEach((e, i) => {
+    entries.forEach((e) => {
       if (e.isIntersecting) {
         setTimeout(() => e.target.classList.add('visible'), (e.target.dataset.i || 0) * 55);
         obs.unobserve(e.target);
