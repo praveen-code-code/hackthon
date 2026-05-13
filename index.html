@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solete Hackathon 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f6fa;
+    --white: #ffffff;
+    --border: #e8eaf0;
+    --border-dark: #d0d4e0;
+    --text: #1a1d2e;
+    --muted: #6b7280;
+    --light: #9ca3af;
+    --blue: #2563eb;
+    --blue-light: #eff6ff;
+    --green: #16a34a;
+    --green-light: #f0fdf4;
+    --orange: #ea580c;
+    --orange-light: #fff7ed;
+    --red: #dc2626;
+    --purple: #7c3aed;
+    --purple-light: #f5f3ff;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow: 0 4px 16px rgba(0,0,0,0.06), 0 1px 4px rgba(0,0,0,0.04);
+    --shadow-lg: 0 12px 40px rgba(0,0,0,0.1), 0 4px 12px rgba(0,0,0,0.06);
+    --radius: 14px;
+    --radius-sm: 8px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'Plus Jakarta Sans', sans-serif; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+  /* NAV */
+  nav { background: var(--white); border-bottom: 1px solid var(--border); padding: 0 2rem; height: 60px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow-sm); }
+  .nav-brand { display: flex; align-items: center; gap: 0.6rem; font-weight: 800; font-size: 1.05rem; color: var(--text); text-decoration: none; }
+  .nav-logo {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+  .nav-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; background: var(--blue-light); color: var(--blue); padding: 0.18rem 0.55rem; border-radius: 100px; font-weight: 500; border: 1px solid rgba(37,99,235,0.18); }
+  .nav-links { display: flex; gap: 0.2rem; }
+  .nav-links a { font-size: 0.83rem; font-weight: 500; color: var(--muted); text-decoration: none; padding: 0.38rem 0.8rem; border-radius: var(--radius-sm); transition: background 0.15s, color 0.15s; }
+  .nav-links a:hover { background: var(--bg); color: var(--text); }
+
+  /* HERO */
+  .hero { background: var(--white); border-bottom: 1px solid var(--border); padding: 5rem 2rem 4rem; text-align: center; }
+  .hero-inner { max-width: 660px; margin: 0 auto; }
+  .solete-badge { display: inline-flex; align-items: center; gap: 0.45rem; font-size: 0.78rem; font-weight: 600; color: var(--blue); background: var(--blue-light); border: 1px solid rgba(37,99,235,0.2); padding: 0.32rem 0.85rem; border-radius: 100px; margin-bottom: 1.4rem; animation: fadeUp 0.45s ease both; }
+  .hero h1 { font-size: clamp(2rem, 5vw, 3.1rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 0.9rem; animation: fadeUp 0.45s 0.06s ease both; }
+  .hero h1 em { font-style: normal; color: var(--blue); }
+  .hero-desc { font-size: 0.97rem; color: var(--muted); max-width: 500px; margin: 0 auto 2rem; line-height: 1.7; animation: fadeUp 0.45s 0.12s ease both; }
+  .hero-meta { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; animation: fadeUp 0.45s 0.18s ease both; }
+  .meta-pill { display: flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; font-weight: 500; color: var(--muted); background: var(--bg); border: 1px solid var(--border); padding: 0.38rem 0.85rem; border-radius: 100px; }
+  .meta-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
+
+  /* MAIN */
+  .main { max-width: 1200px; margin: 0 auto; padding: 3rem 2rem; }
+
+  /* SECTION HEADER */
+  .sec-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.4rem; flex-wrap: wrap; gap: 0.6rem; }
+  .sec-title { font-size: 1.2rem; font-weight: 700; letter-spacing: -0.02em; }
+  .sec-sub { font-size: 0.8rem; color: var(--muted); margin-top: 0.15rem; }
+  .count-badge { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--muted); background: var(--white); border: 1px solid var(--border); padding: 0.28rem 0.7rem; border-radius: 100px; }
+
+  /* PROJECTS GRID */
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1rem; margin-bottom: 3rem; }
+
+  /* CARD */
+  .card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s; }
+  .card:hover { box-shadow: var(--shadow-lg); border-color: var(--border-dark); transform: translateY(-2px); }
+  .card-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 0.9rem; }
+  .card-icon-wrap { width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; }
+  .card-num { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: var(--light); }
+  .card h3 { font-size: 0.98rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.32rem; line-height: 1.3; }
+  .card-purpose { font-size: 0.8rem; color: var(--muted); line-height: 1.55; margin-bottom: 0.9rem; }
+  .card-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-bottom: 0.9rem; }
+  .tag { font-size: 0.65rem; font-weight: 500; padding: 0.2rem 0.5rem; border-radius: 100px; border: 1px solid var(--border); color: var(--muted); background: var(--bg); }
+
+  /* icon bg colors */
+  .c1 .card-icon-wrap { background: #eff6ff; } .c2 .card-icon-wrap { background: #fef2f2; }
+  .c3 .card-icon-wrap { background: #f0fdf4; } .c4 .card-icon-wrap { background: #fefce8; }
+  .c5 .card-icon-wrap { background: #f5f3ff; } .c6 .card-icon-wrap { background: #fff7ed; }
+  .c7 .card-icon-wrap { background: #fdf4ff; } .c8 .card-icon-wrap { background: #fff1f2; }
+  .c9 .card-icon-wrap { background: #f0fdfa; } .c10 .card-icon-wrap { background: #eff6ff; }
+
+  .card-divider { height: 1px; background: var(--border); margin: 0.9rem 0; }
+
+  /* EXPANDABLE */
+  .card-details { display: none; }
+  .card-details.open { display: block; animation: expandIn 0.22s ease; }
+  @keyframes expandIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+
+  .detail-block { margin-bottom: 1.1rem; }
+  .detail-label { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--light); margin-bottom: 0.55rem; display: block; }
+  .feat-list { list-style: none; display: flex; flex-direction: column; gap: 0.28rem; }
+  .feat-list li { font-size: 0.8rem; color: var(--text); display: flex; align-items: flex-start; gap: 0.45rem; line-height: 1.5; }
+  .feat-list li::before { content: '✓'; font-size: 0.68rem; color: var(--green); font-weight: 700; margin-top: 0.14rem; flex-shrink: 0; }
+
+  .db-tables { display: flex; flex-direction: column; gap: 0.45rem; }
+  .db-table { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.65rem 0.8rem; }
+  .db-table-name { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; font-weight: 500; color: var(--text); margin-bottom: 0.2rem; }
+  .db-table-cols { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--muted); line-height: 1.55; word-break: break-word; }
+
+  .api-list { display: flex; flex-direction: column; gap: 0.3rem; }
+  .api-item { display: flex; align-items: center; gap: 0.55rem; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; padding: 0.42rem 0.7rem; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text); }
+  .method { font-size: 0.58rem; font-weight: 700; padding: 0.16rem 0.42rem; border-radius: 4px; min-width: 42px; text-align: center; letter-spacing: 0.05em; flex-shrink: 0; }
+  .GET { background: #dcfce7; color: #15803d; } .POST { background: #dbeafe; color: #1d4ed8; }
+  .PUT { background: #fef9c3; color: #a16207; } .DELETE { background: #fee2e2; color: #b91c1c; }
+
+  /* CARD FOOTER */
+  .card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 0.9rem; }
+  .expand-btn { font-size: 0.76rem; font-weight: 600; font-family: 'Plus Jakarta Sans', sans-serif; color: var(--blue); background: var(--blue-light); border: 1px solid rgba(37,99,235,0.15); padding: 0.38rem 0.82rem; border-radius: 100px; cursor: pointer; transition: background 0.15s; display: flex; align-items: center; gap: 0.3rem; }
+  .expand-btn:hover { background: #dbeafe; }
+  .expand-btn .arr { transition: transform 0.22s; display: inline-block; font-size: 0.68rem; }
+  .expand-btn.open .arr { transform: rotate(180deg); }
+  .diff { font-size: 0.65rem; font-weight: 600; padding: 0.22rem 0.6rem; border-radius: 100px; }
+  .diff.beginner { background: var(--green-light); color: var(--green); }
+  .diff.intermediate { background: var(--orange-light); color: var(--orange); }
+  .diff.advanced { background: var(--purple-light); color: var(--purple); }
+
+  /* RULES */
+  .rules-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.75rem 2rem; margin-bottom: 3rem; }
+  .rules-intro { font-size: 0.86rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.4rem; padding-bottom: 1.4rem; border-bottom: 1px solid var(--border); }
+  .rules-intro strong { color: var(--text); }
+  .rules-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 0.85rem; }
+  .rule-item { display: flex; gap: 0.8rem; align-items: flex-start; padding: 0.9rem 1rem; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); }
+  .rule-icon { width: 34px; height: 34px; border-radius: 7px; background: var(--white); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 0.95rem; flex-shrink: 0; box-shadow: var(--shadow-sm); }
+  .rule-title { font-size: 0.85rem; font-weight: 700; color: var(--text); margin-bottom: 0.2rem; }
+  .rule-desc { font-size: 0.76rem; color: var(--muted); line-height: 1.5; }
+
+  /* AI NOTICE */
+  .ai-notice { background: var(--blue-light); border: 1px solid rgba(37,99,235,0.2); border-radius: var(--radius); padding: 1.1rem 1.4rem; display: flex; align-items: flex-start; gap: 0.9rem; margin-bottom: 1.4rem; }
+  .ai-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 0.05rem; }
+  .ai-title { font-size: 0.86rem; font-weight: 700; color: var(--blue); margin-bottom: 0.2rem; }
+  .ai-desc { font-size: 0.78rem; color: #1d4ed8; line-height: 1.55; opacity: 0.85; }
+
+  /* TECH STACK */
+  .stack-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem 1.75rem; margin-bottom: 3rem; }
+  .stack-pills { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.9rem; }
+  .stack-pill { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; padding: 0.3rem 0.8rem; border-radius: 100px; border: 1px solid var(--border); color: var(--text); background: var(--bg); transition: background 0.14s, border-color 0.14s; }
+  .stack-pill:hover { background: var(--white); border-color: var(--border-dark); }
+
+  /* FOOTER */
+  footer { background: var(--white); border-top: 1px solid var(--border); padding: 2rem; text-align: center; }
+  .footer-brand { font-weight: 800; font-size: 0.98rem; color: var(--text); margin-bottom: 0.3rem; letter-spacing: -0.02em; }
+  .footer-brand span { color: var(--blue); }
+  .footer-copy { font-size: 0.75rem; color: var(--light); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+  .fade-up { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 640px) {
+    .projects-grid { grid-template-columns: 1fr; }
+    .rules-grid { grid-template-columns: 1fr; }
+    .hero { padding: 3rem 1.25rem 2.5rem; }
+    .main { padding: 2rem 1.25rem; }
+    nav { padding: 0 1.25rem; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="#">
+   <img src="solete-logo.jpg" alt="Solete Logo" class="nav-logo">
+    Solete
+    <span class="nav-tag">Hackathon 2026
+    </span>
+  </a>
+  <div class="nav-links">
+    <a href="#projects">Projects</a>
+    <a href="#rules">Rules</a>
+    <a href="#stack">Tech Stack</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="solete-badge">◆ Presented by Solete</div>
+    <h1>Backend <em>Build</em> Challenge</h1>
+    <p class="hero-desc">Choose one of 10 real-world project ideas and build a fully working backend API with a frontend. All project specs, database schemas, and API routes are provided below.</p>
+    <div class="hero-meta">
+      <span class="meta-pill"><span class="meta-dot"></span> 10 Project Tracks</span>
+      <span class="meta-pill">🤖 AI Tools Allowed</span>
+      <span class="meta-pill">🏆 Open to All Students</span>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="ai-notice fade-up">
+    <div class="ai-icon">🤖</div>
+    <div>
+      <div class="ai-title">AI Tools are Allowed</div>
+      <div class="ai-desc">You are free to use ChatGPT, Claude, Gemini, Copilot, or any other AI tool to help you code, debug, and plan. However, you must understand what you build and be ready to answer questions about your code during evaluation.</div>
+    </div>
+  </div>
+
+  <!-- PROJECTS -->
+  <div id="projects">
+    <div class="sec-header fade-up">
+      <div>
+        <div class="sec-title">Project Tracks</div>
+        <div class="sec-sub">Click "View Details" on any card to see features, schema, and API routes</div>
+      </div>
+      <span class="count-badge">10 projects</span>
+    </div>
+
+    <div class="projects-grid">
+
+      <div class="card c1 fade-up">
+        <div class="card-top"><div class="card-icon-wrap">✅</div><span class="card-num">#01</span></div>
+        <h3>Smart Todo Manager</h3>
+        <p class="card-purpose">Manage daily tasks with priority levels, due dates, and a productivity score to track completed work.</p>
+        <div class="card-tags"><span class="tag">JWT Auth</span><span class="tag">CRUD</span><span class="tag">Priority</span><span class="tag">Due Dates</span><span class="tag">Productivity Score</span></div>
+        <div class="card-details" id="d1">
+          <div class="card-divider"></div>
+          <div class="detail-block">
+            <span class="detail-label">Features</span>
+            <ul class="feat-list">
+              <li>User Signup &amp; Login with JWT Authentication</li>
+              <li>Create, Update &amp; Delete Todos</li>
+              <li>Mark tasks as Completed</li>
+              <li>Priority Levels — High / Medium / Low</li>
+              <li>Due Date per task</li>
+              <li>Productivity Score endpoint</li>
+            </ul>
+          </div>
+          <div class="detail-block">
+            <span class="detail-label">Database Tables</span>
+            <div class="db-tables">
+              <div class="db-table"><div class="db-table-name">users_db</div><div class="db-table-cols">user_id (PK) · username · email UNIQUE · password</div></div>
+              <div class="db-table"><div class="db-table-name">todos</div><div class="db-table-cols">todo_id (PK) · user_id (FK) · title · description · priority · status DEFAULT 'Pending' · due_date · created_at</div></div>
+            </div>
+          </div>
+          <div class="detail-block">
+            <span class="detail-label">API Endpoints</span>
+            <div class="api-list">
+              <div class="api-item"><span class="method POST">POST</span>/signup</div>
+              <div class="api-item"><span class="method POST">POST</span>/login</div>
+              <div class="api-item"><span class="method POST">POST</span>/create-todo</div>
+              <div class="api-item"><span class="method GET">GET</span>/get-todos</div>
+              <div class="api-item"><span class="method PUT">PUT</span>/update-todo/&lt;id&gt;</div>
+              <div class="api-item"><span class="method DELETE">DELETE</span>/delete-todo/&lt;id&gt;</div>
+              <div class="api-item"><span class="method PUT">PUT</span>/complete-todo/&lt;id&gt;</div>
+              <div class="api-item"><span class="method GET">GET</span>/productivity-score</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button class="expand-btn" onclick="toggle('d1',this)">View Details <span class="arr">▾</span></button>
+          <span class="diff beginner">Beginner</span>
+        </div>
+      </div>
+
+      <div class="card c2 fade-up">
+        <div class="card-top"><div class="card-icon-wrap">🔥</div><span class="card-num">#02</span></div>
+        <h3>Habit Tracker</h3>
+        <p class="card-purpose">Build consistency by tracking daily habits, maintaining streaks, and viewing progress toward target day goals.</p>
+        <div class="card-tags"><span class="tag">JWT Auth</span><span class="tag">Streaks</span><span class="tag">Check-ins</span><span class="tag">Statistics</span></div>
+        <div class="card-details" id="d2">
+          <div class="card-divider"></div>
+          <div class="detail-block">
+            <span class="detail-label">Features</span>
+            <ul class="feat-list">
+              <li>JWT Authentication</li>
+              <li>Create habits with target days</li>
+              <li>Daily Check-in system</li>
+              <li>Habit Streak Tracking</li>
+              <li>Daily Statistics</li>
+              <li>Habit Progress view</li>
+            </ul>
+          </div>
+          <div class="detail-block">
+            <span class="detail-label">Database Tables</span>
+            <div class="db-tables">
+              <div class="db-table"><div class="db-table-name">users_db</div><div class="db-table-cols">user_id (PK) · username · email UNIQUE · password</div></div>
+              <div class="db-table"><div class="db-table-name">habits</div><div class="db-table-cols">habit_id (PK) · user_id (FK) · title · target_days · created_at</div></div>
+              <div class="db-table"><div class="db-table-name">habit_logs</div><div class="db-table-cols">log_id (PK) · habit_id (FK) · completed_date DEFAULT CURRENT_DATE</div></div>
+            </div>
+          </div>
+          <div class="detail-block">
+            <span class="detail-label">API Endpoints</span>
+            <div class="api-list">
+              <div class="api-item"><span class="method POST">POST</span>/signup</div>
+              <div class="api-item"><span class="method POST">POST</span>/login</div>
+              <div class="api-item"><span class="method POST">POST</span>/create-habit</div>
+              <div class="api-item"><span class="method GET">GET</span>/get-habits</div>
+              <div class="api-item"><span class="method POST">POST</span>/habit-checkin/&lt;habit_id&gt;</div>
+              <div class="api-item"><span class="method GET">GET</span>/habit-streak/&lt;habit_id&gt;</div>
+              <div class="api-item"><span class="method DELETE">DELETE</span>/delete-habit/&lt;habit_id&gt;</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button class="expand-btn" onclick="toggle('d2',this)">View Details <span class="arr">▾</span></button>
+          <span class="diff beginner">Beginner</span>
+        </div>
+      </div>
+
+      <div class="card c3 fade-up">
+        <div class="card-top"><div class="card-icon-wrap">💰</div><span class="card-num">#03</span></div>
+        <h3>Expense Tracker</h3>
+        <p class="card-purpose">Track income and expenses, categorize spending, view your total balance, and generate monthly reports.</p>
+        <div class="card-tags"><span class="tag">JWT Auth</span><span class="tag">Transactions</span><span class="tag">Categories</span><span class="tag">Reports</span><span class="tag">Balance</span></div>
+        <div class="card-details" id="d3">
+          <div class="card-divider"></div>
+          <div class="detail-block">
+            <span class="detail-label">Features</span>
+            <ul class="feat-list">
+              <li>JWT Authentication</li>
+              <li>Add Income &amp; Expense Transactions</li>
+              <li>Monthly Financial Reports</li>
+              <li>Expense Categories (Food, Travel, Bills…)</li>
+              <li>Total Balance calculation</li>
+              <li>Filter by date and category</li>
+            </ul>
+          </div>
+          <div class="detail-block">
+            <span class="detail-label">Database Tables</span>
+            <div class="db-tables">
+              <div class="db-table"><div class="db-table-name">users_db</div><div class="db-table-cols">user_id (PK) · username · email UNIQUE · password</div></div>
+              <div class="db-table"><div class="db-table-name">transactions</div><div class="db-table-cols">transaction_id (PK) · user_id (FK) · amount DECIMAL · type · category · note · created_at</div></div>
+            </div>
+          </div>
+          <div class="detail-block">
+            <span class="detail-label">API Endpoints</span>
+            <div class="api-list">
+              <div class="api-item"><span class="method POST">POST</span>/signup</div>
+              <div class="api-item"><span class="method POST">POST</span>/login</div>
+              <div class="api-item"><span class="method POST">POST</span>/add-transaction</div>
+              <div class="api-item"><span class="method GET">GET</span>/get-transactions</div>
+              <div class="api-item"><span class="method PUT">PUT</span>/update-transaction/&lt;id&gt;</div>
+              <div class="api-item"><span class="method DELETE">DELETE</span>/delete-transaction/&lt;id&gt;</div>
+              <div class="api-item"><span class="method GET">GET</span>/monthly-report</div>
+              <div class="api-item"><span class="method GET">GET</span>/total-balance</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button class="expand-btn" onclick="toggle('d3',this)">View Details <span class="arr">▾</span></button>
+          <span class="diff intermediate">Intermediate</span>
+        </div>
+      </div>
+
+      <div class="card c4 fade-up">
+        <div class="card-top"><div class="card-icon-wrap">📝</div><span class="card-num">#04</span></div>
+        <h3>Notes Management System</h3>
+        <p class="card-purpose">Securely store, organize, and manage personal notes with pinning support and full-text search.</p>
+        <div class="card-tags"><span class="tag">JWT Auth</span><span class="tag">CRUD Notes</span><span class="tag">Search</span><span class="tag">Pin Notes</span></div>
+        <div class="card-details" id="d4">
+          <div class="card-divider"></div>
+          <div class="detail-block">
+            <span class="detail-label">Features</span>
+            <ul class="feat-list">
+              <li>JWT Authentication</li>
+              <li>Create, Update &amp; Delete Notes</li>
+              <li>Search Notes by title or content</li>
+              <li>Pin Important Notes to the top</li>
+            </ul>
+          </div>
+          <div class="detail-block">
+            <span class="detail-label">Database Tables</span>
+            <div class="db-tables">
+              <div class="db-table"><div class="db-table-name">users_db</div><div class="db-table-cols">user_id (PK) · username · email UNIQUE · password</div></div>
+              <div class="db-table"><div class="db-table-name">notes</div><div class="db-table-cols">note_id (PK) · user_id (FK) · title · description · is_pinned BOOLEAN DEFAULT FALSE · created_at</div></div>
+            </div>
+          </div>
+          <div class="detail-block">
+            <span class="detail-label">API Endpoints</span>
+            <div class="api-list">
+              <div class="api-item"><span class="method POST">POST</span>/signup</div>
+              <div class="api-item"><span class="method POST">POST</span>/login</div>
+              <div class="api-item"><span class="method POST">POST</span>/create-note</div>
+              <div class="api-item"><span class="method GET">GET</span>/get-notes</div>
+              <div class="api-item"><span class="method PUT">PUT</span>/update-note/&lt;id&gt;</div>
+              <div class="api-item"><span class="method DELETE">DELETE</span>/delete-note/&lt;id&gt;</div>
+              <div class="api-item"><span class="method PUT">PUT</span>/pin-note/&lt;id&gt;</div>
+              <div class="api-item"><span class="method GET">GET</span>/search-notes</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button class="expand-btn" onclick="toggle('d4',this)">View Details <span class="arr">▾</span></button>
+          <span class="diff beginner">Beginner</span>
+        </div>
+      </div>
+
+      <div class="card c5 fade-up">
+        <div class="card-top"><div class="card-icon-wrap">🎓</div><span class="card-num">#05</span></div>
+        <h3>Student Task Planner</h3>
+        <p class="card-purpose">Help students manage assignments, deadlines, and subjects with completion tracking across all courses.</p>
+        <div class="card-tags"><span class="tag">JWT Auth</span><span class="tag">Subjects</span><span class="tag">Assignments</span><span class="tag">Deadlines</span></div>
+        <div class="card-details" id="d5">
+          <div class="card-divider"></div>
+          <div class="detail-block">
+            <span class="detail-label">Features</span>
+            <ul class="feat-list">
+              <li>JWT Authentication</li>
+              <li>Subject Management (add courses)</li>
+              <li>Assignment Tracking per subject</li>
+              <li>Deadline Monitoring</li>
+              <li>Completion Status updates</li>
+            </ul>
+          </div>
+          <div class="detail-block">
+            <span class="detail-label">Database Tables</span>
+            <div class="db-tables">
+              <div class="db-table"><div class="db-table-name">users_db</div><div class="db-table-cols">user_id (PK) · username · email UNIQUE · password</div></div>
+              <div class="db-table"><div class="db-table-name">subjects</div><div class="db-table-cols">subject_id (PK) · user_id (FK) · subject_name</div></div>
+              <div class="db-table"><div class="db-table-name">assignments</div><div class="db-table-cols">assignment_id (PK) · subject_id (FK) · title · due_date · status DEFAULT 'Pending'</div></div>
+            </div>
+          </div>
+          <div class="detail-block">
+            <span class="detail-label">API Endpoints</span>
+            <div class="api-list">
+              <div class="api-item"><span class="method POST">POST</span>/signup</div>
+              <div class="api-item"><span class="method POST">POST</span>/login</div>
+              <div class="api-item"><span class="method POST">POST</span>/create-subject</div>
+              <div class="api-item"><span class="method POST">POST</span>/add-assignment</div>
+              <div class="api-item"><span class="method GET">GET</span>/get-assignments</div>
+              <div class="api-item"><span class="method PUT">PUT</span>/complete-assignment/&lt;id&gt;</div>
+              <div class="api-item"><span class="method DELETE">DELETE</span>/delete-assignment/&lt;id&gt;</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button class="expand-btn" onclick="toggle('d5',this)">View Details <span class="arr">▾</span></button>
+          <span class="diff beginner">Beginner</span>
+        </div>
+      </div>
+
+      <div class="card c6 fade-up">
+        <div class="card-top"><div class="card-icon-wrap">🔖</div><span class="card-num">#06</span></div>
+        <h3>Bookmark Saver API</h3>
+        <p class="card-purpose">Save, categorize, and search useful links with the ability to mark favorites for quick access later.</p>
+        <div class="card-tags"><span class="tag">JWT Auth</span><span class="tag">Categories</span><span class="tag">Favorites</span><span class="tag">Search</span></div>
+        <div class="card-details" id="d6">
+          <div class="card-divider"></div>
+          <div class="detail-block">
+            <span class="detail-label">Features</span>
+            <ul class="feat-list">
+              <li>JWT Authentication</li>
+              <li>Save Bookmarks with URL &amp; title</li>
+              <li>Categorize Links</li>
+              <li>Mark / Unmark Favorite Bookmarks</li>
+              <li>Search functionality</li>
+            </ul>
+          </div>
+          <div class="detail-block">
+            <span class="detail-label">Database Tables</span>
+            <div class="db-tables">
+              <div class="db-table"><div class="db-table-name">users_db</div><div class="db-table-cols">user_id (PK) · username · email UNIQUE · password</div></div>
+              <div class="db-table"><div class="db-table-name">bookmarks</div><div class="db-table-cols">bookmark_id (PK) · user_id (FK) · title · url · category · is_favorite BOOLEAN DEFAULT FALSE</div></div>
+            </div>
+          </div>
+          <div class="detail-block">
+            <span class="detail-label">API Endpoints</span>
+            <div class="api-list">
+              <div class="api-item"><span class="method POST">POST</span>/signup</div>
+              <div class="api-item"><span class="method POST">POST</span>/login</div>
+              <div class="api-item"><span class="method POST">POST</span>/add-bookmark</div>
+              <div class="api-item"><span class="method GET">GET</span>/get-bookmarks</div>
+              <div class="api-item"><span class="method PUT">PUT</span>/favorite-bookmark/&lt;id&gt;</div>
+              <div class="api-item"><span class="method DELETE">DELETE</span>/delete-bookmark/&lt;id&gt;</div>
+              <div class="api-item"><span class="method GET">GET</span>/search-bookmarks</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button class="expand-btn" onclick="toggle('d6',this)">View Details <span class="arr">▾</span></button>
+          <span class="diff beginner">Beginner</span>
+        </div>
+      </div>
+
+      <div class="card c7 fade-up">
+        <div class="card-top"><div class="card-icon-wrap">🎪</div><span class="card-num">#07</span></div>
+        <h3>Event Registration System</h3>
+        <p class="card-purpose">Create events, manage participant registrations, and track all attendees per event with full organizer controls.</p>
+        <div class="card-tags"><span class="tag">JWT Auth</span><span class="tag">Events</span><span class="tag">Registrations</span><span class="tag">Participants</span></div>
+        <div class="card-details" id="d7">
+          <div class="card-divider"></div>
+          <div class="detail-block">
+            <span class="detail-label">Features</span>
+            <ul class="feat-list">
+              <li>JWT Authentication</li>
+              <li>Create Events with date &amp; description</li>
+              <li>Register Participants for events</li>
+              <li>View all Participants per event</li>
+              <li>Delete events</li>
+            </ul>
+          </div>
+          <div class="detail-block">
+            <span class="detail-label">Database Tables</span>
+            <div class="db-tables">
+              <div class="db-table"><div class="db-table-name">users_db</div><div class="db-table-cols">user_id (PK) · username · email UNIQUE · password</div></div>
+              <div class="db-table"><div class="db-table-name">events</div><div class="db-table-cols">event_id (PK) · user_id (FK) · title · description · event_date</div></div>
+              <div class="db-table"><div class="db-table-name">registrations</div><div class="db-table-cols">registration_id (PK) · event_id (FK) · participant_name · email</div></div>
+            </div>
+          </div>
+          <div class="detail-block">
+            <span class="detail-label">API Endpoints</span>
+            <div class="api-list">
+              <div class="api-item"><span class="method POST">POST</span>/signup</div>
+              <div class="api-item"><span class="method POST">POST</span>/login</div>
+              <div class="api-item"><span class="method POST">POST</span>/create-event</div>
+              <div class="api-item"><span class="method GET">GET</span>/get-events</div>
+              <div class="api-item"><span class="method POST">POST</span>/register-event/&lt;id&gt;</div>
+              <div class="api-item"><span class="method GET">GET</span>/event-participants/&lt;id&gt;</div>
+              <div class="api-item"><span class="method DELETE">DELETE</span>/delete-event/&lt;id&gt;</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button class="expand-btn" onclick="toggle('d7',this)">View Details <span class="arr">▾</span></button>
+          <span class="diff intermediate">Intermediate</span>
+        </div>
+      </div>
+
+      <div class="card c8 fade-up">
+        <div class="card-top"><div class="card-icon-wrap">📣</div><span class="card-num">#08</span></div>
+        <h3>Complaint Management System</h3>
+        <p class="card-purpose">Raise complaints with priority levels and track their status from Open through to Resolved.</p>
+        <div class="card-tags"><span class="tag">JWT Auth</span><span class="tag">Complaints</span><span class="tag">Status Tracking</span><span class="tag">Priority</span></div>
+        <div class="card-details" id="d8">
+          <div class="card-divider"></div>
+          <div class="detail-block">
+            <span class="detail-label">Features</span>
+            <ul class="feat-list">
+              <li>JWT Authentication</li>
+              <li>Raise Complaints with description</li>
+              <li>Status Tracking — Open / In-Progress / Resolved</li>
+              <li>Priority — High / Medium / Low</li>
+              <li>Complaint Details view</li>
+            </ul>
+          </div>
+          <div class="detail-block">
+            <span class="detail-label">Database Tables</span>
+            <div class="db-tables">
+              <div class="db-table"><div class="db-table-name">users_db</div><div class="db-table-cols">user_id (PK) · username · email UNIQUE · password</div></div>
+              <div class="db-table"><div class="db-table-name">complaints</div><div class="db-table-cols">complaint_id (PK) · user_id (FK) · title · description · priority · status DEFAULT 'Open' · created_at</div></div>
+            </div>
+          </div>
+          <div class="detail-block">
+            <span class="detail-label">API Endpoints</span>
+            <div class="api-list">
+              <div class="api-item"><span class="method POST">POST</span>/signup</div>
+              <div class="api-item"><span class="method POST">POST</span>/login</div>
+              <div class="api-item"><span class="method POST">POST</span>/create-complaint</div>
+              <div class="api-item"><span class="method GET">GET</span>/get-complaints</div>
+              <div class="api-item"><span class="method PUT">PUT</span>/update-status/&lt;id&gt;</div>
+              <div class="api-item"><span class="method DELETE">DELETE</span>/delete-complaint/&lt;id&gt;</div>
+              <div class="api-item"><span class="method GET">GET</span>/complaint-details/&lt;id&gt;</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button class="expand-btn" onclick="toggle('d8',this)">View Details <span class="arr">▾</span></button>
+          <span class="diff intermediate">Intermediate</span>
+        </div>
+      </div>
+
+      <div class="card c9 fade-up">
+        <div class="card-top"><div class="card-icon-wrap">📔</div><span class="card-num">#09</span></div>
+        <h3>Daily Journal API</h3>
+        <p class="card-purpose">Write personal journal entries, track your daily mood, and browse your journal history by date.</p>
+        <div class="card-tags"><span class="tag">JWT Auth</span><span class="tag">Mood Tracking</span><span class="tag">History</span><span class="tag">Date-wise</span></div>
+        <div class="card-details" id="d9">
+          <div class="card-divider"></div>
+          <div class="detail-block">
+            <span class="detail-label">Features</span>
+            <ul class="feat-list">
+              <li>JWT Authentication</li>
+              <li>Create personal Journal entries</li>
+              <li>Mood Tracking — Happy / Sad / Neutral / Anxious</li>
+              <li>Journal History browsing</li>
+              <li>Date-wise Journal retrieval</li>
+            </ul>
+          </div>
+          <div class="detail-block">
+            <span class="detail-label">Database Tables</span>
+            <div class="db-tables">
+              <div class="db-table"><div class="db-table-name">users_db</div><div class="db-table-cols">user_id (PK) · username · email UNIQUE · password</div></div>
+              <div class="db-table"><div class="db-table-name">journals</div><div class="db-table-cols">journal_id (PK) · user_id (FK) · title · content · mood · created_at</div></div>
+            </div>
+          </div>
+          <div class="detail-block">
+            <span class="detail-label">API Endpoints</span>
+            <div class="api-list">
+              <div class="api-item"><span class="method POST">POST</span>/signup</div>
+              <div class="api-item"><span class="method POST">POST</span>/login</div>
+              <div class="api-item"><span class="method POST">POST</span>/create-journal</div>
+              <div class="api-item"><span class="method GET">GET</span>/get-journals</div>
+              <div class="api-item"><span class="method PUT">PUT</span>/update-journal/&lt;id&gt;</div>
+              <div class="api-item"><span class="method DELETE">DELETE</span>/delete-journal/&lt;id&gt;</div>
+              <div class="api-item"><span class="method GET">GET</span>/journal-history</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button class="expand-btn" onclick="toggle('d9',this)">View Details <span class="arr">▾</span></button>
+          <span class="diff beginner">Beginner</span>
+        </div>
+      </div>
+
+      <div class="card c10 fade-up">
+        <div class="card-top"><div class="card-icon-wrap">🏗️</div><span class="card-num">#10</span></div>
+        <h3>Mini Project Management API</h3>
+        <p class="card-purpose">Organize projects, manage tasks with status tracking, and monitor overall project progress percentage.</p>
+        <div class="card-tags"><span class="tag">JWT Auth</span><span class="tag">Projects</span><span class="tag">Tasks</span><span class="tag">Progress</span></div>
+        <div class="card-details" id="d10">
+          <div class="card-divider"></div>
+          <div class="detail-block">
+            <span class="detail-label">Features</span>
+            <ul class="feat-list">
+              <li>JWT Authentication</li>
+              <li>Create Projects with description</li>
+              <li>Add Tasks to projects</li>
+              <li>Task Status — Pending / In-Progress / Done</li>
+              <li>Project Progress endpoint (% complete)</li>
+            </ul>
+          </div>
+          <div class="detail-block">
+            <span class="detail-label">Database Tables</span>
+            <div class="db-tables">
+              <div class="db-table"><div class="db-table-name">users_db</div><div class="db-table-cols">user_id (PK) · username · email UNIQUE · password</div></div>
+              <div class="db-table"><div class="db-table-name">projects</div><div class="db-table-cols">project_id (PK) · user_id (FK) · title · description · created_at</div></div>
+              <div class="db-table"><div class="db-table-name">project_tasks</div><div class="db-table-cols">task_id (PK) · project_id (FK) · title · status DEFAULT 'Pending'</div></div>
+            </div>
+          </div>
+          <div class="detail-block">
+            <span class="detail-label">API Endpoints</span>
+            <div class="api-list">
+              <div class="api-item"><span class="method POST">POST</span>/signup</div>
+              <div class="api-item"><span class="method POST">POST</span>/login</div>
+              <div class="api-item"><span class="method POST">POST</span>/create-project</div>
+              <div class="api-item"><span class="method POST">POST</span>/add-task</div>
+              <div class="api-item"><span class="method GET">GET</span>/get-projects</div>
+              <div class="api-item"><span class="method PUT">PUT</span>/update-task/&lt;id&gt;</div>
+              <div class="api-item"><span class="method DELETE">DELETE</span>/delete-task/&lt;id&gt;</div>
+              <div class="api-item"><span class="method GET">GET</span>/project-progress/&lt;id&gt;</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button class="expand-btn" onclick="toggle('d10',this)">View Details <span class="arr">▾</span></button>
+          <span class="diff advanced">Advanced</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- RULES -->
+  <div id="rules">
+    <div class="sec-header fade-up">
+      <div>
+        <div class="sec-title">Rules &amp; Guidelines</div>
+        <div class="sec-sub">Read carefully before you start building</div>
+      </div>
+    </div>
+    <div class="rules-card fade-up">
+      <p class="rules-intro">This hackathon is organised by <strong>Solete</strong>. The goal is to build a real, working backend API with a connected frontend for one of the 10 project tracks above. You are <strong>free to use any AI tool</strong> — ChatGPT, Claude, Gemini, Copilot, or anything else — to help write, debug, and plan your code. What matters is that you understand what you've built.</p>
+      <div class="rules-grid">
+        <div class="rule-item"><div class="rule-icon">1️⃣</div><div><div class="rule-title">Pick One Project</div><div class="rule-desc">Choose any one track from the 10 options. Each participant or team works on a single project. No duplication within a team.</div></div></div>
+        <div class="rule-item"><div class="rule-icon">2️⃣</div><div><div class="rule-title">Build the Backend API</div><div class="rule-desc">Use Flask or FastAPI with PostgreSQL. Implement all listed endpoints with JWT authentication and proper error handling.</div></div></div>
+        <div class="rule-item"><div class="rule-icon">3️⃣</div><div><div class="rule-title">Design a Frontend</div><div class="rule-desc">Create a working UI (HTML/CSS/JS or React) that connects to your API and demonstrates all core features.</div></div></div>
+        <div class="rule-item"><div class="rule-icon">4️⃣</div><div><div class="rule-title">Follow the DB Schema</div><div class="rule-desc">Use the exact table and column names provided. You may add extra columns but all required fields must be present.</div></div></div>
+        <div class="rule-item"><div class="rule-icon">5️⃣</div><div><div class="rule-title">AI Tools Are Allowed</div><div class="rule-desc">ChatGPT, Claude, Gemini — all fine. But during evaluation you must explain your code. If you can't, marks will be deducted.</div></div></div>
+        <!--<div class="rule-item"><div class="rule-icon">6️⃣</div><div><div class="rule-title">GitHub Submission</div><div class="rule-desc">Push to a public GitHub repo with a clear README, setup steps, and environment variable documentation.</div></div></div>-->
+        <div class="rule-item"><div class="rule-icon">7️⃣</div><div><div class="rule-title">No Plagiarism</div><div class="rule-desc">AI-generated code is fine. Copy-pasting another participant's code is not allowed and will result in disqualification.</div></div></div>
+        <div class="rule-item"><div class="rule-icon">🌟</div><div><div class="rule-title">Bonus Points</div><div class="rule-desc">Extra credit for live deployment (Render / Railway), a Postman collection, unit tests, and polished UI design.</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TECH STACK -->
+  <div id="stack">
+    <div class="sec-header fade-up">
+      <div>
+        <div class="sec-title">Recommended Tech Stack</div>
+        <div class="sec-sub">You can use any technology — these are just suggestions</div>
+      </div>
+    </div>
+    <div class="stack-card fade-up">
+      <div class="stack-pills">
+        <span class="stack-pill">Python / Flask</span>
+        <span class="stack-pill">FastAPI</span>
+        <span class="stack-pill">PostgreSQL</span>
+        <span class="stack-pill">SQLAlchemy</span>
+        <span class="stack-pill">JWT (PyJWT)</span>
+        <span class="stack-pill">bcrypt</span>
+        <span class="stack-pill">Postman</span>
+        <span class="stack-pill">HTML / CSS / JS</span>
+        <span class="stack-pill">React</span>
+        <span class="stack-pill">Render</span>
+        <span class="stack-pill">Railway</span>
+        <span class="stack-pill">GitHub</span>
+        <span class="stack-pill">Supabase</span>
+        <span class="stack-pill">Neon DB</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-brand"><span>Solete</span> Hackathon 2026</div>
+  <div class="footer-copy">10 Project Tracks · AI Tools Allowed · Build Real, Ship Fast</div>
+</footer>
+
+<script>
+  function toggle(id, btn) {
+    const el = document.getElementById(id);
+    const open = el.classList.toggle('open');
+    btn.classList.toggle('open', open);
+    btn.childNodes[0].textContent = open ? 'Hide Details ' : 'View Details ';
+  }
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), (e.target.dataset.i || 0) * 55);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.fade-up').forEach((el, i) => {
+    el.dataset.i = i % 4;
+    obs.observe(el);
+  });
+</script>
+</body>
+</html>
